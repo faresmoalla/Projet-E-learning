@@ -1,0 +1,25 @@
+
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <div class="row">
+                <div class="col-xl-6 align-content-center" >
+                    <br><br>
+                    <div class="form-group">
+                        {{ form_start(formulaire) }}
+                        <div class="form-group">
+                            {{ form_widget(formulaire.categorienom  , {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'categorieNom'}} ) }}
+                            {{ form_errors(formulaire.categorienom ) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_widget(formulaire.categorieimage , {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'categorieImage'}} ) }}
+                            {{ form_errors(formulaire.categorieimage) }}
+                        </div>
+                    </div>
+                    {{ form_end(formulaire) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

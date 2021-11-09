@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/axentix@0.5.3/dist/css/axentix.min.css">
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+<header>
+    <nav class="navbar primary">
+        <div class="navbar-menu ml-auto">
+            <a class="navbar-link" href="#">Accueil</a>
+            <div class="dropdown" id="dropdown">
+                <a class="navbar-link dropdown-trigger">
+                    Catégories
+                </a>
+                <div class="dropdown-content white shadow-1 rouded-1">
+
+                </div>
+
+    </nav>
+</header>
+
+<main>
+    {% block body %}{% endblock %}
+</main>
+
+<footer class="footer primary">
+</footer>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/axentix@0.5.3/dist/js/axentix.min.js"></script>
+{% block javascripts %}
+    <script>
+        let drop = new Axentix.Dropdown('#dropdown')
+    </script>
+{% endblock %}
+</body>
+</html>
