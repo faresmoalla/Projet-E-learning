@@ -1,0 +1,29 @@
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <div class="row">
+                <div class="col-xl-6 align-content-center" >
+                    <br><br>
+                    <div class="form-group">
+                        {{ form_start(formchapitre) }}
+                        <div class="form-group">
+                            {{ form_widget(formchapitre.nomcours   , {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'nom du cours'}} ) }}
+                            {{ form_errors(formchapitre.nomcours ) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_widget(formchapitre.chapitrenom , {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'nom du chapitre'}} ) }}
+                            {{ form_errors(formchapitre.chapitrenom) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_widget(formchapitre.videochapitre , {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'video chapitre'}} ) }}
+                            {{ form_errors(formchapitre.videochapitre) }}
+                        </div>
+
+                    </div>
+                    {{ form_end(formchapitre) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

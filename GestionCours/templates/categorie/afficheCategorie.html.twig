@@ -1,0 +1,47 @@
+{% for message in app.flashes('info') %}
+<div class="alert alert-success">
+    {{ message }}
+</div>
+{% endfor %}
+
+<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" border="2">
+    <thead>
+    <tr>
+        <th></th>
+        <th></th>
+        <th>categorieID  </th>
+        <th>categorieNom </th>
+        <th>categorieImage</th>
+    </tr>
+    </thead>
+    <tfoot>
+    <tr>
+        <th></th>
+        <th></th>
+        <th>categorieID  </th>
+        <th>categorieNom </th>
+        <th>categorieImage</th>
+    </tfoot>
+
+    <tbody>
+    {% for f in tableCategorie %}
+        <tr>
+            <td><a href="{{ path('modifiercategorie',{'categorieid': f.categorieid}) }}">Modifier</a></td>
+
+            <td><a href="{{ path('supprimercategorie',{'categorieID': f.categorieID}) }}">Supprimer</a></td>
+
+            <td>{{ f.categorieID  }}</td>
+            <td>{{ f.categorieNom  }}</td>
+            <td><img src="{{ asset('/front/web/images/')}}{{ f.categorieImage }}" width="100"  /></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
