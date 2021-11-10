@@ -17,4 +17,31 @@ class AcceuilController extends AbstractController
             'controller_name' => 'AcceuilController',
         ]);
     }
+
+    /**
+     * @Route("/acceuil2", name="acceuil2")
+     */
+    public function index2(): Response
+    {
+        return $this->render('acceuil/Acceuil2.html.twig', [
+            'controller_name2' => 'AcceuilController2',
+        ]);
+    }
+
+
+
+    /**
+         * @Route("/firstpage", name="firstpage")
+     */
+    public function firstpage(){
+        return $this->render('/cours/test.html.twig', [
+            'firstpage' => 'firstpage',
+        ]);
+    }
+
+
+
+
+
+
 }

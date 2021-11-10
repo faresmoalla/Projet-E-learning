@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Cours;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,9 +17,12 @@ class CoursType extends AbstractType
             ->add('utilisateurnom')
             ->add('nomcours')
             ->add('nbrchapitres')
+
             ->add('description')
             ->add('coursimg',FileType::class, array('data_class' => null))
-            ->add('categorienom')
+                        ->add('Categorie')
+
+
         ;
     }
 

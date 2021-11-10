@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base2.html.twig' %}
 
 {% block title %}Statistiques{% endblock %}
 
@@ -16,17 +16,18 @@
 {% endblock %}
 
 {% block javascripts %}
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
 <script>
     let categories = document.querySelector("#categories")
     let categGraph = new Chart(categories, {
         type: "pie",
         data: {
-            labels: {{ coursNom|raw }},
+            labels: {{ categorieNom|raw }},
             datasets: [{
                 label: "Répartition des catégories",
-                data: [2, 5, 3],
-                backgroundColor: ["red","green","blue"]
+                data: {{ categorieCount|raw }},
+                backgroundColor: ["black","green","blue","red","red","white"]
             }  ]
         }
     })

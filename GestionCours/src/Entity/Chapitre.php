@@ -7,7 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Chapitre
  *
- * @ORM\Table(name="chapitre", indexes={@ORM\Index(name="FK_coursnOM", columns={"nomCours"})})
  * @ORM\Entity(repositoryClass="App\Repository\ChapitreRepository")
  */
 class Chapitre
@@ -15,18 +14,12 @@ class Chapitre
     /**
      * @var int
      *
-     * @ORM\Column(name="chapitreID", type="integer", nullable=false)
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $chapitreid;
+    private $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nomCours", type="string", length=100, nullable=false)
-     */
-    private $nomcours;
 
     /**
      * @var string
@@ -42,22 +35,21 @@ class Chapitre
      */
     private $videochapitre;
 
-    public function getChapitreid(): ?int
+    /**
+     * @var \Chapitre
+     * @ORM\ManyToOne(targetEntity=Cours::class, inversedBy="Chapitre")
+     * @ORM\JoinColumn(nullable=false)({
+     *  @ORM\JoinColumn(name="cours_id", referencedColumnName="id")
+     * })
+     */
+    private $cours;
+
+    public function getId(): ?int
     {
-        return $this->chapitreid;
+        return $this->id;
     }
 
-    public function getNomcours(): ?string
-    {
-        return $this->nomcours;
-    }
 
-    public function setNomcours(string $nomcours): self
-    {
-        $this->nomcours = $nomcours;
-
-        return $this;
-    }
 
     public function getChapitrenom(): ?string
     {
@@ -79,6 +71,18 @@ class Chapitre
     public function setVideochapitre(string $videochapitre): self
     {
         $this->videochapitre = $videochapitre;
+
+        return $this;
+    }
+
+    public function getCours(): ?Cours
+    {
+        return $this->cours;
+    }
+
+    public function setCours(?Cours $cours): self
+    {
+        $this->cours = $cours;
 
         return $this;
     }

@@ -36,9 +36,9 @@
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
             <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
-            </div>
-            <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <img class="rounded-circle" src="{{ asset('back/amine/img/logo.svg')}}"
+                     alt="..."  style="width:75px;height:75px";>  </div>
+            <div class="sidebar-brand-text mx-3">9arini</div>
         </a>
 
         <!-- Divider -->
@@ -46,7 +46,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link"  href="{{ path('StatCours') }}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -395,39 +395,41 @@
                                         {{ form_errors(form.nbrchapitres) }}
                                     </div>
                                     <div class="form-group">
-                                            {{ form_widget(form.description , {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'Description'}} ) }}
-                                            {{ form_errors(form.description) }}
+                                        {{ form_widget(form.description , {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'Description'}} ) }}
+                                        {{ form_errors(form.description) }}
                                     </div>
                                     <div class="form-group">
                                         {{  form_errors(form.coursimg) }}
                                         {{ form_widget(form.coursimg , {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'Image du cours'}} ) }}
                                     </div>
+
                                     <div class="form-group">
-                                        {{  form_errors(form.categorienom) }}
-                                        {{ form_widget(form.categorienom , {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'Categorie du cours'}} ) }}
+                                        {{  form_errors(form.Categorie) }}
+                                        {{ form_widget(form.Categorie , {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'Categorie Id'}} ) }}
                                     </div>
+
                                     <hr>
                                     {{ form_end(form) }}
 
                                     <hr>
-                                    </div>
+                                </div>
 
                             </div>
                         </div>
-                        </div>
                     </div>
                 </div>
-
             </div>
-            <!-- /.container-fluid -->
 
         </div>
-        <!-- End of Main Content -->
-
-
+        <!-- /.container-fluid -->
 
     </div>
-    <!-- End of Content Wrapper -->
+    <!-- End of Main Content -->
+
+
+
+</div>
+<!-- End of Content Wrapper -->
 
 </div>
 <!-- End of Page Wrapper -->

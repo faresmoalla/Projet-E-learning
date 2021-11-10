@@ -33,13 +33,6 @@ class CategorieController extends AbstractController
             ,['tableCategorie'=>$tablecategorie]);
 
     }
-
-
-
-
-
-
-
     /**
      * @Route("/ajoutcategorie",name="ajoutcategorie")
      */
@@ -56,7 +49,7 @@ class CategorieController extends AbstractController
                 $newFilename = $originalFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
                 try {
                     $imageFile->move(
-                        'C:\wamp64\www\GestionCours\public\front\web\images',
+                        'front\web\images',
                         $newFilename
                     );
                 } catch (FileException $e) {
@@ -67,7 +60,7 @@ class CategorieController extends AbstractController
             $em->persist($categorie);
             $em->flush();
             $this->addFlash(
-                'info','Added successfully!'
+                'info','Ajouté avec succées '
             );
             return $this->redirectToRoute("affichecategorie");
 
@@ -76,18 +69,21 @@ class CategorieController extends AbstractController
     }
 
     /**
-     * @Route("/supprimercategorie/{categorieID}",name="supprimercategorie")
+     * @Route("/supprimercategorie/{id}",name="supprimercategorie")
      */
-    public function deleteCategorie($categorieID,EntityManagerInterface $em ,CategorieRepository $repository){
-        $categorie=$repository->find($categorieID);
+    public function deleteCategorie($id,EntityManagerInterface $em ,CategorieRepository $repository){
+        $categorie=$repository->find($id);
         $em->remove($categorie);
         $em->flush();
+        $this->addFlash(
+            'info','Supprimé avec succées '
+        );
         return $this->redirectToRoute('affichecategorie');
     }
 
 
     /**
-     * @Route("/{categorieid}/modifiercategorie", name="modifiercategorie", methods={"GET","POST"})
+     * @Route("/{id}/modifiercategorie", name="modifiercategorie", methods={"GET","POST"})
      */
     public function edit(Request $request, Categorie $categorie): Response
     {
@@ -103,7 +99,7 @@ class CategorieController extends AbstractController
                 $newFilename = $originalFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
                 try {
                     $imageFile->move(
-                        'C:\wamp64\www\GestionCours\public\front\web\images',
+                        'front\web\images',
                         $newFilename
                     );
                 } catch (FileException $e) {

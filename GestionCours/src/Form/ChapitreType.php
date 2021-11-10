@@ -13,9 +13,9 @@ class ChapitreType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nomcours')
             ->add('chapitrenom')
             ->add('videochapitre',FileType::class, array('data_class' => null))
+            ->add('cours')
         ;
     }
 

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -15,11 +17,11 @@ class Categorie
     /**
      * @var int
      *
-     * @ORM\Column(name="categorieID", type="integer", nullable=false)
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $categorieid;
+    private $id;
 
     /**
      * @var string
@@ -35,9 +37,19 @@ class Categorie
      */
     private $categorieimage;
 
-    public function getCategorieid(): ?int
+    /**
+     * @ORM\OneToMany(targetEntity=Cours::class, mappedBy="Categorie")
+     */
+    private $cours;
+
+    public function __construct()
     {
-        return $this->categorieid;
+        $this->cours = new ArrayCollection();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
     }
 
     public function getCategorienom(): ?string
@@ -63,6 +75,41 @@ class Categorie
 
         return $this;
     }
+
+    /**
+     * @return Collection|Cours[]
+     */
+    public function getCours(): Collection
+    {
+        return $this->cours;
+    }
+
+    public function addCour(Cours $cour): self
+    {
+        if (!$this->cours->contains($cour)) {
+            $this->cours[] = $cour;
+            $cour->setCategorie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCour(Cours $cour): self
+    {
+        if ($this->cours->removeElement($cour)) {
+            // set the owning side to null (unless already changed)
+            if ($cour->getCategorie() === $this) {
+                $cour->setCategorie(null);
+            }
+        }
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return $this->getCategorienom();
+    }
+
 
 
 }

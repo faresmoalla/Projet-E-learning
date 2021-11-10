@@ -9,7 +9,7 @@
     <tr>
         <th></th>
         <th></th>
-        <th>categorieID  </th>
+        <th>id </th>
         <th>categorieNom </th>
         <th>categorieImage</th>
     </tr>
@@ -18,7 +18,7 @@
     <tr>
         <th></th>
         <th></th>
-        <th>categorieID  </th>
+        <th>id </th>
         <th>categorieNom </th>
         <th>categorieImage</th>
     </tfoot>
@@ -26,11 +26,11 @@
     <tbody>
     {% for f in tableCategorie %}
         <tr>
-            <td><a href="{{ path('modifiercategorie',{'categorieid': f.categorieid}) }}">Modifier</a></td>
+            <td><a href="{{ path('modifiercategorie',{'id': f.id}) }}">Modifier</a></td>
 
-            <td><a href="{{ path('supprimercategorie',{'categorieID': f.categorieID}) }}">Supprimer</a></td>
+            <td><a href="{{ path('supprimercategorie',{'id': f.id}) }}">Supprimer</a></td>
 
-            <td>{{ f.categorieID  }}</td>
+            <td>{{ f.id  }}</td>
             <td>{{ f.categorieNom  }}</td>
             <td><img src="{{ asset('/front/web/images/')}}{{ f.categorieImage }}" width="100"  /></td>
         </tr>

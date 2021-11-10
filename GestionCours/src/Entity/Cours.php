@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -15,11 +17,11 @@ class Cours
     /**
      * @var int
      *
-     * @ORM\Column(name="coursID", type="integer", nullable=false)
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $coursid;
+    private $id;
 
     /**
      * @var string
@@ -56,16 +58,30 @@ class Cours
      */
     private $coursimg;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="categorieNom", type="string", length=100, nullable=false)
-     */
-    private $categorienom;
 
-    public function getCoursid(): ?int
+    /**
+     * @var \Categorie
+     *
+     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="cours")
+     * @ORM\JoinColumn(nullable=false)({
+     *   @ORM\JoinColumn(name="categorie_id", referencedColumnName="id")
+     * })
+     */
+    private $Categorie;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Chapitre::class, mappedBy="cours", orphanRemoval=true)
+     */
+    private $Chapitre;
+
+    public function __construct()
     {
-        return $this->coursid;
+        $this->Chapitre = new ArrayCollection();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
     }
 
     public function getUtilisateurnom(): ?string
@@ -155,6 +171,53 @@ class Cours
         return'';
     }
 
+    public function getCategorie(): ?Categorie
+    {
+        return $this->Categorie;
+    }
+
+    public function setCategorie(?Categorie $Categorie): self
+    {
+        $this->Categorie = $Categorie;
+
+        return $this;
+    }
+
+
+    public function __toString()
+    {
+        return $this->getNomcours();
+    }
+
+    /**
+     * @return Collection|Chapitre[]
+     */
+    public function getChapitre(): Collection
+    {
+        return $this->Chapitre;
+    }
+
+    public function addChapitre(Chapitre $chapitre): self
+    {
+        if (!$this->Chapitre->contains($chapitre)) {
+            $this->Chapitre[] = $chapitre;
+            $chapitre->setCours($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChapitre(Chapitre $chapitre): self
+    {
+        if ($this->Chapitre->removeElement($chapitre)) {
+            // set the owning side to null (unless already changed)
+            if ($chapitre->getCours() === $this) {
+                $chapitre->setCours(null);
+            }
+        }
+
+        return $this;
+    }
 
 
 
