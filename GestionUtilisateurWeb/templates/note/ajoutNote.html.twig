@@ -1,0 +1,9 @@
+{{ form_start(formulaire) }}
+<h1>donner note </h1>
+{{ form_errors(formulaire.notevaleur) }}
+{{ form_label(formulaire.notevaleur,"note :") }}
+{{ form_widget(formulaire.notevaleur) }}
+
+<br>
+
+{{ form_end(formulaire) }}

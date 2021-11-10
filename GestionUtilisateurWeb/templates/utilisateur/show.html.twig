@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    liste des Utilisateur !{% endblock %}
+
+{% block body %}
+
+
+
+    <table class="table" border="1">
+    <thead>
+    <tr>
+        <th scope="col">id</th>
+        <th scope="col">prenom</th>
+        <th scope="col">nom</th>
+        <th scope="col">genre</th>
+        <th scope="col">addresse</th>
+        <th scope="col">pays</th>
+        <th scope="col">phone</th>
+        <th scope="col">fonction</th>
+        <th scope="col">organisme</th>
+        <th scope="col">softskills</th>
+        <th scope="col">e-mail</th>
+        <th scope="col">mot de passe</th>
+        <th scope="col">role</th>
+        <th scope="col">nom entreprise</th>
+        <th scope="col">entrepreneur site web</th>
+        <th scope="col">entrepreneur usage</th>
+        <th scope="col">image</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>{% for u in Utilisateurs  %}
+        <td>{{ u.utilisateurid }}</td>
+
+        <td>{{ u.utilisateurprenom }}</td>
+        <td>{{ u.utilisateurnom }}</td>
+        <td>{{ u.utilisateurgenre }}</td>
+
+        <td>{{ u.utilisateuradresse }}</td>
+        <td>{{ u.utilisateurpays }}</td>
+        <td>{{ u.utilisateurphone }}</td>
+        <td>{{ u.utilisateurfonction }}</td>
+        <td>{{ u.utilisateurorganisme }}</td>
+        <td>{{ u.utilisateursavoiretre }}</td>
+        <td>{{ u.utilisateuradresseemail }}</td>
+        <td>{{ u.utilisateurmdp }}</td>
+        <td>{{ u.utilisateurrole }}</td>
+        <td>{{ u.nomentreprise }}</td>
+        <td>{{ u.entrepreneursiteweb }}</td>
+        <td>{{ u.entrepreneurusage }}</td>
+
+        <td><img src="{{ asset('C:/wamp64/www/image')}}{{ u.utilisateurpdp }}" width="100"  /></td>
+
+
+
+    </tr>{% endfor %}
+
+    </tbody>
+    </table>
+
+
+{% endblock %}

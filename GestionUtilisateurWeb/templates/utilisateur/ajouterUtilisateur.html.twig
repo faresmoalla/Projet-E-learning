@@ -1,0 +1,73 @@
+
+
+{{ form_start(formulaire) }}
+<h1>Inscription </h1>
+{{ form_errors(formulaire.utilisateurnom) }}
+{{ form_label(formulaire.utilisateurnom,"nom :") }}
+{{ form_widget(formulaire.utilisateurnom) }}
+<br>
+{{ form_errors(formulaire.utilisateurprenom) }}
+{{ form_label(formulaire.utilisateurprenom,"prenom :") }}
+{{ form_widget(formulaire.utilisateurprenom) }}
+<br>
+{{ form_errors(formulaire.utilisateurgenre) }}
+{{ form_label(formulaire.utilisateurgenre,"genre :") }}
+{{ form_widget(formulaire.utilisateurgenre) }}
+<br>
+{{ form_errors(formulaire.utilisateurddn) }}
+{{ form_label(formulaire.utilisateurddn,"Date de Naissance :") }}
+{{ form_widget(formulaire.utilisateurddn) }}
+<br>
+{{ form_errors(formulaire.utilisateuradresse) }}
+{{ form_label(formulaire.utilisateuradresse,"Addresse :") }}
+{{ form_widget(formulaire.utilisateuradresse) }}
+<br>
+{{ form_errors(formulaire.utilisateurpays) }}
+{{ form_label(formulaire.utilisateurpays,"Pays :") }}
+{{ form_widget(formulaire.utilisateurpays) }}
+<br>
+{{ form_errors(formulaire.utilisateuradresseemail) }}
+{{ form_label(formulaire.utilisateuradresseemail,"E-mail :") }}
+{{ form_widget(formulaire.utilisateuradresseemail) }}
+<br>
+{{ form_errors(formulaire.utilisateurmdp) }}
+{{ form_label(formulaire.utilisateurmdp,"Mot de passe :") }}
+{{ form_widget(formulaire.utilisateurmdp) }}
+<br>
+{{ form_errors(formulaire.utilisateurphone) }}
+{{ form_label(formulaire.utilisateurphone,"numéro de téléphone :") }}
+{{ form_widget(formulaire.utilisateurphone) }}
+<br>
+{{ form_errors(formulaire.utilisateurrole) }}
+{{ form_label(formulaire.utilisateurrole,"Role :") }}
+{{ form_widget(formulaire.utilisateurrole) }}
+<br>
+{{ form_errors(formulaire.utilisateurfonction) }}
+{{ form_label(formulaire.utilisateurfonction,"fonction :") }}
+{{ form_widget(formulaire.utilisateurfonction) }}
+<br>
+{{ form_errors(formulaire.utilisateurorganisme) }}
+{{ form_label(formulaire.utilisateurorganisme,"Organisme :") }}
+{{ form_widget(formulaire.utilisateurorganisme) }}
+<br>
+{{ form_errors(formulaire.utilisateursavoiretre) }}
+{{ form_label(formulaire.utilisateursavoiretre,"Softskills :") }}
+{{ form_widget(formulaire.utilisateursavoiretre) }}
+<br>
+{{ form_errors(formulaire.nomentreprise) }}
+{{ form_label(formulaire.nomentreprise,"Nome de l'Entreprise :") }}
+{{ form_widget(formulaire.nomentreprise) }}
+<br>
+{{ form_errors(formulaire.entrepreneursiteweb) }}
+{{ form_label(formulaire.entrepreneursiteweb,"site web de l'entreprise :") }}
+{{ form_widget(formulaire.entrepreneursiteweb) }}
+<br>
+{{ form_errors(formulaire.entrepreneurusage) }}
+{{ form_label(formulaire.entrepreneurusage,"Usage :") }}
+{{ form_widget(formulaire.entrepreneurusage) }}
+<br>
+{{ form_errors(formulaire.utilisateurpdp) }}
+{{ form_label(formulaire.utilisateurpdp,"photo de profil :") }}
+{{ form_widget(formulaire.utilisateurpdp) }}
+
+{{ form_end(formulaire) }}
