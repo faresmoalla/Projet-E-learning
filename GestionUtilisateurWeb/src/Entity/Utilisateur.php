@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Utilisateur
@@ -26,14 +28,14 @@ class Utilisateur
     /**
      * @var string
      *
-     * @ORM\Column(name="utilisateurPDP", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="utilisateurPDP", type="text", length=65535, nullable=true)
      */
     private $utilisateurpdp;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="utilisateurPrenom", type="string", length=20, nullable=true)
+     * @ORM\Column(name="utilisateurPrenom", type="string", length=20, nullable=false)
      */
     private $utilisateurprenom;
 
@@ -54,28 +56,28 @@ class Utilisateur
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="utilisateurDDN", type="date", nullable=false)
+     * @ORM\Column(name="utilisateurDDN", type="date", nullable=true)
      */
     private $utilisateurddn;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="utilisateurAdresse", type="string", length=60, nullable=false)
+     * @ORM\Column(name="utilisateurAdresse", type="string", length=60, nullable=true)
      */
     private $utilisateuradresse;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="utilisateurPays", type="string", length=100, nullable=false)
+     * @ORM\Column(name="utilisateurPays", type="string", length=100, nullable=true)
      */
     private $utilisateurpays;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="utilisateurphone", type="integer", nullable=false)
+     * @ORM\Column(name="utilisateurphone", type="integer", nullable=true)
      */
     private $utilisateurphone;
 
@@ -104,6 +106,8 @@ class Utilisateur
      * @var string
      *
      * @ORM\Column(name="utilisateurAdresseEmail", type="string", length=60, nullable=false)
+     * @Assert\NotBlank(message="Email is required")
+     * @Assert\Email(message = "The email '{{ value }}' is not a valid email")
      */
     private $utilisateuradresseemail;
 
@@ -111,6 +115,11 @@ class Utilisateur
      * @var string
      *
      * @ORM\Column(name="utilisateurMDP", type="string", length=5000, nullable=false)
+     * @Assert\Length(
+     *      min = 6,
+     *      minMessage = "the password must be at least {{ limit }} characters long",
+     *
+     * )
      */
     private $utilisateurmdp;
 

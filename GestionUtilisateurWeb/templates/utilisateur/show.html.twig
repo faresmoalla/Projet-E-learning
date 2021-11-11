@@ -1,8 +1,4 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}
-    liste des Utilisateur !{% endblock %}
-
+{% extends 'base-back.html.twig' %}
 {% block body %}
 
 
@@ -32,7 +28,7 @@
 
     <tbody>
     <tr>{% for u in Utilisateurs  %}
-        <td>{{ u.utilisateurid }}</td>
+        <td>{{ u.id }}</td>
 
         <td>{{ u.utilisateurprenom }}</td>
         <td>{{ u.utilisateurnom }}</td>

@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Repository\NoteRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=NoteRepository::class)
  */
@@ -19,12 +19,18 @@ class Note
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Range(
+     *      min =0,
+     *      max = 5,
+     *      notInRangeMessage = "the note must be between {{ min }} and {{ max }}",
+     * )
      */
     private $notevaleur;
 
     /**
      * @ORM\ManyToOne(targetEntity=Utilisateur::class)
      * @ORM\JoinColumn(nullable=false,name="utilisateur_id", referencedColumnName="utilisateurID")
+     *
      */
     private $utilisateur;
 

@@ -4,12 +4,18 @@ namespace App\Controller;
 
 
 use App\Entity\Utilisateur;
+use App\Form\EntrepreneurType;
+use App\Form\FormateurType;
+use App\Form\InscriptionType;
+use App\Form\LoginType;
+use App\Form\MembreType;
 use App\Form\UtilisateurType;
 use App\Repository\UtilisateurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use function PHPUnit\Framework\equalTo;
 
 
 class UtilisateurController extends AbstractController
@@ -29,34 +35,21 @@ class UtilisateurController extends AbstractController
     public function ajouterUtilisateur(Request $request): Response
     {
         $Utilisateur = new Utilisateur ();
-        $form= $this->createForm(UtilisateurType::class,$Utilisateur);
+        $form= $this->createForm(InscriptionType::class,$Utilisateur);
         $form->handleRequest($request);
-        if($form->isSubmitted()){
-            $imageFile = $form->get('utilisateurpdp')->getData();
+        if($form->isSubmitted() && $form->isValid()){
+
             $mdp=$form->get('utilisateurmdp')->getData();
             $hashmdp=sha1($mdp);
 
-            if ($imageFile) {
-                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-                $newFilename = $originalFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
-                try {
-                    $imageFile->move(
-                        'C:\wamp64\www\image',
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
-                }
-                $Utilisateur->setUtilisateurpdp($newFilename);
-                $Utilisateur->setUtilisateurmdp($hashmdp);
-            }
+            $Utilisateur->setUtilisateurmdp($hashmdp);
             $em= $this->getDoctrine()->getManager();
             $em->persist($Utilisateur );
             $em->flush();
             $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute("utilisateur");
         }
-        return $this->render("utilisateur/ajouterUtilisateur.html.twig",array("formulaire"=>$form->createView()));
+        return $this->render("utilisateur/Inscription.html.twig",array("formulaire"=>$form->createView()));
     }
     /**
      * @Route("/supprimerUtilisateur/{id}",name="supprimerUtilisateur")
@@ -76,14 +69,37 @@ class UtilisateurController extends AbstractController
     public function update(Request $request,$id)
     {
         $Utilisateur = $this->getDoctrine()->getRepository(Utilisateur::class)->find($id);
-        $form= $this->createForm(UtilisateurType::class,$Utilisateur);
-        $form->handleRequest($request);
-        if($form->isSubmitted()){
-            $em= $this->getDoctrine()->getManager();
-            $em->flush();
-            return $this->redirectToRoute("utilisateur");
+        $Utilisateur->setUtilisateurmdp("");
+        if(strcmp($Utilisateur->getUtilisateurrole(),"Membre")==0) {
+            $form = $this->createForm(MembreType::class, $Utilisateur);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+                return $this->redirectToRoute("utilisateur");
+            }
+            return $this->render("utilisateur/updateMembre.html.twig", array("formulaire" => $form->createView()));
         }
-        return $this->render("utilisateur/update.html.twig",array("formulaire"=>$form->createView()));
+        else if(strcmp($Utilisateur->getUtilisateurrole(),"Formateur")==0) {
+            $form = $this->createForm(FormateurType::class, $Utilisateur);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+                return $this->redirectToRoute("utilisateur");
+            }
+            return $this->render("utilisateur/updateFormateur.html.twig", array("formulaire" => $form->createView()));
+        }
+        else if(strcmp($Utilisateur->getUtilisateurrole(),"Entrepreneur")==0) {
+            $form = $this->createForm(EntrepreneurType::class, $Utilisateur);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+                return $this->redirectToRoute("utilisateur");
+            }
+            return $this->render("utilisateur/updateEntrepreneur.html.twig", array("formulaire" => $form->createView()));
+        }
     }
     /**
      * @Route("/AfficheUtilisateurs",name="AfficheUtilisateurs")
@@ -96,6 +112,14 @@ class UtilisateurController extends AbstractController
             'Utilisateurs' => $UtilisateurRepository ->findAll()
         ]);
     }
+    /**
+     * @Route("/login", name="login")
+     */
+    public function login(Request $request): Response
+    {
+
+            return $this->render("utilisateur/login.html.twig");
+        }
 
 
 

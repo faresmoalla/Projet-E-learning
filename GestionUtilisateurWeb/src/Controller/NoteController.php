@@ -34,7 +34,7 @@ class NoteController extends AbstractController
         $Note->setUtilisateur($Utilisateur);
         $form= $this->createForm(NoteType::class,$Note);
         $form->handleRequest($request);
-        if($form->isSubmitted()){
+        if($form->isSubmitted() && $form->isValid()){
             $em= $this->getDoctrine()->getManager();
             $em->persist($Note );
             $em->flush();

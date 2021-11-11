@@ -1,3 +1,5 @@
+{% extends 'base-front.html.twig' %}
+{% block body %}
 {{ form_start(formulaire) }}
 <h1>donner note </h1>
 {{ form_errors(formulaire.notevaleur) }}
@@ -7,3 +9,4 @@
 <br>
 
 {{ form_end(formulaire) }}
+{% endblock %}
