@@ -13,7 +13,7 @@ class Note
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer",name="noteID")
      */
     private $id;
 

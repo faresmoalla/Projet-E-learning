@@ -48,10 +48,13 @@ class NoteController extends AbstractController
      */
     public function update(Request $request,$id)
     {
+
         $Note = $this->getDoctrine()->getRepository(Note::class)->find($id);
+
+
         $form= $this->createForm(NoteType::class,$Note);
         $form->handleRequest($request);
-        if($form->isSubmitted()){
+        if($form->isSubmitted() && $form->isValid()){
             $em= $this->getDoctrine()->getManager();
             $em->flush();
             return $this->redirectToRoute("note");

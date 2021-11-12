@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 
 /**
@@ -14,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="utilisateur", uniqueConstraints={@ORM\UniqueConstraint(name="utilisateurAdresseEmail", columns={"utilisateurAdresseEmail"})})
  * @ORM\Entity
  */
-class Utilisateur
+class Utilisateur implements UserInterface
 {
     /**
      * @var int
@@ -112,7 +113,7 @@ class Utilisateur
     private $utilisateuradresseemail;
 
     /**
-     * @var string
+     * @var string The hashed password
      *
      * @ORM\Column(name="utilisateurMDP", type="string", length=5000, nullable=false)
      * @Assert\Length(
@@ -366,6 +367,69 @@ class Utilisateur
 
 
 
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
+    {
+        return (string) $this->utilisateuradresseemail;
+    }
+
+    /**
+     * @see UserInterface
+     */
 
 
+    public function setRoles(array $roles): self
+    {
+        $this->utilisateurrole = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getPassword(): string
+    {
+        return $this->utilisateurmdp;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->utilisateurmdp = $password;
+
+        return $this;
+    }
+
+    /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+    public function getRoles()
+    {
+        $roles = json_decode($this->utilisateurrole);
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
 }

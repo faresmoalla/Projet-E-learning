@@ -4,7 +4,9 @@ namespace App\Form;
 
 use App\Entity\Utilisateur;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -26,9 +28,10 @@ class InscriptionType extends AbstractType
                 ],
                 'expanded' => true
             ])
-            ->add('utilisateurddn')
+            ->add('utilisateurddn',BirthdayType::class)
             ->add('utilisateuradresseemail')
             ->add('utilisateurmdp', RepeatedType::class, [
+                'type' => PasswordType::class,
                 'first_options'  => ['label' => 'mot de passe '],
                 'second_options' => ['label' => 'confirmer mot de passe'],
             ])

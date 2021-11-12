@@ -4,8 +4,10 @@ namespace App\Form;
 
 use App\Entity\Utilisateur;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,7 +28,7 @@ class FormateurType extends AbstractType
                 ],
                 'expanded' => true
             ])
-            ->add('utilisateurddn')
+            ->add('utilisateurddn',BirthdayType::class)
             ->add('utilisateuradresse')
             ->add('utilisateurpays')
             ->add('utilisateurphone')
@@ -35,6 +37,7 @@ class FormateurType extends AbstractType
             ->add('utilisateursavoiretre')
             ->add('utilisateuradresseemail')
             ->add('utilisateurmdp', RepeatedType::class, [
+                'type' => PasswordType::class,
                 'first_options'  => ['label' => 'mot de passe '],
                 'second_options' => ['label' => 'confirmer mot de passe'],
             ])

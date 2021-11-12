@@ -16,6 +16,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use function PHPUnit\Framework\equalTo;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 
 class UtilisateurController extends AbstractController
@@ -29,20 +31,33 @@ class UtilisateurController extends AbstractController
             'controller_name' => 'UtilisateurController',
         ]);
     }
+
     /**
      * @Route("/ajouterUtilisateur", name="ajouterUtilisateur")
+     * @param Request $request
+     * @return Response
      */
-    public function ajouterUtilisateur(Request $request): Response
+    public function ajouterUtilisateur(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $Utilisateur = new Utilisateur ();
         $form= $this->createForm(InscriptionType::class,$Utilisateur);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
 
-            $mdp=$form->get('utilisateurmdp')->getData();
-            $hashmdp=sha1($mdp);
+            //$mdp=$form->get('utilisateurmdp')->getData();
+           // $hashmdp=sha1($mdp);
+            // $Utilisateur->setUtilisateurmdp($hashmdp);
 
-            $Utilisateur->setUtilisateurmdp($hashmdp);
+
+            //$plainPassword =$form->get('utilisateurmdp')->getData();;
+            //$encoded = $encoder->encodePassword($Utilisateur, $plainPassword);
+            //$Utilisateur->setUtilisateurmdp($encoded);
+            $Utilisateur->setUtilisateurmdp(
+                $passwordEncoder->encodePassword(
+                    $Utilisateur,
+                    $form->get('utilisateurmdp')->getData()
+                )
+            );
             $em= $this->getDoctrine()->getManager();
             $em->persist($Utilisateur );
             $em->flush();
@@ -99,6 +114,15 @@ class UtilisateurController extends AbstractController
                 return $this->redirectToRoute("utilisateur");
             }
             return $this->render("utilisateur/updateEntrepreneur.html.twig", array("formulaire" => $form->createView()));
+        }else  {
+            $form = $this->createForm(UtilisateurType::class, $Utilisateur);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+                return $this->redirectToRoute("utilisateur");
+            }
+            return $this->render("utilisateur/updateAdmin.html.twig", array("formulaire" => $form->createView()));
         }
     }
     /**
@@ -113,12 +137,12 @@ class UtilisateurController extends AbstractController
         ]);
     }
     /**
-     * @Route("/login", name="login")
+     * @Route("/acceuil", name="acceuil")
      */
-    public function login(Request $request): Response
+    public function acceuil(Request $request): Response
     {
 
-            return $this->render("utilisateur/login.html.twig");
+            return $this->render("utilisateur/acceuil.html.twig");
         }
 
 
