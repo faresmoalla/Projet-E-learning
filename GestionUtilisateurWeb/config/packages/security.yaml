@@ -2,12 +2,13 @@ security:
 
 
     encoders:
+        Symfony\Component\Security\Core\User\User: 'auto'
         App\Entity\User:
             algorithm: auto
         App\Entity\Utilisateur:
-             algorithm: sha256
-             encode_as_base64: false
-             iterations: 1
+            algorithm: sha256
+            encode_as_base64: false
+            iterations: 1
 
 
 
@@ -20,7 +21,6 @@ security:
             entity:
                 class: App\Entity\Utilisateur
                 property: email
-        # used to reload user from session & other features (e.g. switch_user)
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -28,11 +28,21 @@ security:
         main:
             anonymous: lazy
             provider: app_user_provider
+            remote_user:
+                provider: app_user_provider
+            http_basic:
+                realm: Secured Area
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
+            form_login:
+                # ...
+                always_use_default_target_path: true
+
+
             logout:
-                path: app_logout
+                path: /logout
+                target: /
                 # where to redirect after logout
                 # target: app_any_route
 
@@ -45,5 +55,5 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+    # - { path: ^/admin, roles: ROLE_ADMIN }
+    # - { path: ^/profile, roles: ROLE_USER }

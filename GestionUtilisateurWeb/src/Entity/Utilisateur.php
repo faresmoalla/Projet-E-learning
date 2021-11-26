@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
-
+use Symfony\Component\Security\Core\User\EquatableInterface;
 
 /**
  * Utilisateur
@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Table(name="utilisateur", uniqueConstraints={@ORM\UniqueConstraint(name="utilisateurAdresseEmail", columns={"utilisateurAdresseEmail"})})
  * @ORM\Entity
  */
-class Utilisateur implements UserInterface
+class Utilisateur implements UserInterface,EquatableInterface
 {
     /**
      * @var int
@@ -76,9 +76,9 @@ class Utilisateur implements UserInterface
     private $utilisateurpays;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="utilisateurphone", type="integer", nullable=true)
+     * @ORM\Column(name="utilisateurphone", type="string", nullable=true)
      */
     private $utilisateurphone;
 
@@ -245,12 +245,12 @@ class Utilisateur implements UserInterface
         return $this;
     }
 
-    public function getUtilisateurphone(): ?int
+    public function getUtilisateurphone(): ?string
     {
         return $this->utilisateurphone;
     }
 
-    public function setUtilisateurphone(int $utilisateurphone): self
+    public function setUtilisateurphone(?string $utilisateurphone): self
     {
         $this->utilisateurphone = $utilisateurphone;
 
@@ -366,7 +366,6 @@ class Utilisateur implements UserInterface
     }
 
 
-
     /**
      * A visual identifier that represents this user.
      *
@@ -431,5 +430,21 @@ class Utilisateur implements UserInterface
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
+    }
+    public function isEqualTo(UserInterface $user)
+    {
+        if (!$user instanceof Utilisateur) {
+            return false;
+        }
+
+        if ($this->utilisateurmdp !== $user->getPassword()) {
+            return false;
+        }
+
+        if ($this->utilisateuradresseemail !== $user->getUsername()) {
+            return false;
+        }
+
+        return true;
     }
 }

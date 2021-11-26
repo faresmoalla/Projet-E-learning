@@ -36,7 +36,8 @@
         "symfony/web-server-bundle": "4.4.*",
         "symfony/yaml": "4.4.*",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0"
+        "twig/twig": "^2.12|^3.0",
+        "twilio/sdk": "^6.31"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5",
@@ -92,5 +93,12 @@
             "allow-contrib": false,
             "require": "4.4.*"
         }
+    },
+    "require": {
+        "twilio/sdk": "^5.0"
     }
+
 }
+
+
+

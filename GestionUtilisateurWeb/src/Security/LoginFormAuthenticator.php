@@ -2,7 +2,9 @@
 
 namespace App\Security;
 
+use Twilio\Rest\Client;
 use App\Entity\User;
+use Symfony\Component\Security\Core\Event\AuthenticationSuccessEvent;
 use Symfony\Component\Security\Core\Security;
 use App\Entity\Utilisateur;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,8 +21,10 @@ use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Security\Guard\PasswordAuthenticatedInterface;
-
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
+
+
 
 class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
 {
@@ -33,8 +37,14 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     private $csrfTokenManager;
     private $passwordEncoder;
 
+
+    // change the 'InMemoryUserProvider' type-hint in the constructor if
+    // you are injecting a different type of user provider
+
+
     public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
     {
+
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
@@ -96,11 +106,32 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
+            $account_sid = 'AC04fedb666177e902b410a42d0b4614b9';
+            $auth_token = 'e19969ecb5f0279d8539e03f2c414f40';
+            $twilio_number = "+12724442986";
+            $email=$request->get('email');
+            $Utilisateur = $this->entityManager->getRepository(Utilisateur::class)->findOneBy(['utilisateuradresseemail' => $email]);
+            $name=$Utilisateur->getUtilisateurnom();
+            $num= $Utilisateur->getUtilisateurphone();
+            $n='+216'.$num;
+            $client = new Client($account_sid, $auth_token);
+            $client->messages->create(
+            // Where to send a text message (your cell phone?)
+                $n,
+                array(
+                    'from' => $twilio_number,
+                    'body' => 'welcome back'.' '.$name.' '.'to 9arini'
+                )
+            );
+
         //$id = $authenticationUtils->getUser()->getId() ;
+
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
 
+            return new RedirectResponse($this->urlGenerator->generate('acceuil'));
 
-        return new RedirectResponse($this->urlGenerator->generate('acceuil'));
+
+
     }
 
     protected function getLoginUrl()

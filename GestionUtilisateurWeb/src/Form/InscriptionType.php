@@ -30,6 +30,7 @@ class InscriptionType extends AbstractType
             ])
             ->add('utilisateurddn',BirthdayType::class)
             ->add('utilisateuradresseemail')
+            ->add('utilisateurphone')
             ->add('utilisateurmdp', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'first_options'  => ['label' => 'mot de passe '],

@@ -28,6 +28,8 @@
 
     <tbody>
     <tr>{% for u in Utilisateurs  %}
+        <td><a href="{{ path('modifierUtilisateur',{'id': u.id}) }}">Modifier</a></td>
+        <td><a href="{{ path('supprimerUtilisateur',{'id': u.id}) }}">Supprimer</a></td>
         <td>{{ u.id }}</td>
 
         <td>{{ u.utilisateurprenom }}</td>
@@ -46,8 +48,7 @@
         <td>{{ u.nomentreprise }}</td>
         <td>{{ u.entrepreneursiteweb }}</td>
         <td>{{ u.entrepreneurusage }}</td>
-
-        <td><img src="{{ asset('C:/wamp64/www/image')}}{{ u.utilisateurpdp }}" width="100"  /></td>
+        <td><img src="{{ asset('/front/web/images/')}}{{ u.utilisateurpdp }}" width="100"  /></td>
 
 
 

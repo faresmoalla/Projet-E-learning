@@ -36,7 +36,7 @@ class MembreType extends AbstractType
             ->add('utilisateurorganisme')
 
             ->add('utilisateuradresseemail')
-            ->add('utilisateurmdp', RepeatedType::class, [
+            ->add('utilisateurmdp', RepeatedType::class , [
                 'type' => PasswordType::class,
                 'first_options'  => ['label' => 'mot de passe '],
                 'second_options' => ['label' => 'confirmer mot de passe'],
@@ -46,6 +46,7 @@ class MembreType extends AbstractType
                     'Membre' => 'Membre',
                     'Formateur' => 'Formateur',
                     'Entrepreneur' => 'Entrepreneur',
+
                 ],
                 'expanded' => true
             ])

@@ -80,6 +80,12 @@
                                 {{ form_widget(formulaire.utilisateurmdp) }}
                             </div>
                             <div class="form-group">
+                                {{ form_errors(formulaire.utilisateurphone) }}
+                                {{ form_label(formulaire.utilisateurphone,"numero de telephone :") }}
+                                {{ form_widget(formulaire.utilisateurphone) }}
+
+                            </div>
+                            <div class="form-group">
 
                                 {{ form_widget(formulaire.submit ,{ 'label': 'registre' }) }}
                             </div>

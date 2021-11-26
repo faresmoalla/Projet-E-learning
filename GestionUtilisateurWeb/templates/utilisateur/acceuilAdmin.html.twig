@@ -61,27 +61,23 @@
                 <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
                 <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                {% if "IS_AUTHENTICATED_FULLY" %}
-                    {% set user = app.user %}
-
+                {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+                    {% set url = absolute_url(asset('')) ~ 'modifierUtilisateur/' ~ app.user.id %}
+                    {% set nom =  app.user.utilisateurnom %}
                 {% else %}
-                    {% set user = "no user connected" %}
+                    {% set url = "OTHER_URL" %}
+                    {% set nom = "OTHER_nom" %}
                 {% endif %}
-                <p>{{ dump(user) }}</p>
-                <p>{{ dump(session) }}</p>
-
-                    {% set url = absolute_url(asset('')) ~ 'modifierUtilisateur/' ~ user.id %}
-                    {% set nom =  user.utilisateurnom %}
-
 
                 <li class="btn-cta"><a href="{{ url }}"><span>{{ nom }} </span></a></li> <pre> </pre>
+                {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+                    {% set url1 =  '/front/web/images/' ~ app.user.utilisateurpdp %}
 
-                    {% set url1 =  '/front/web/images/' ~ user.utilisateurpdp %}
-
-
-                <img src="{{ url1 }}"width="50" height="50" id="img" alt="ajouter photo de profile">
-
-
+                {% else %}
+                    {% set url1 = "OTHER_URL" %}
+                {% endif %}
+                <img src="{{ url1 }}"width="100" height="100" id="img">
+                <li class="btn-cta"><a href="{{ path('AfficheUtilisateurs') }}"><span>Dashboard </span></a></li> <pre> </pre>
 
 
 
