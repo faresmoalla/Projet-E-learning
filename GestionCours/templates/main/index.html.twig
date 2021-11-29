@@ -1,0 +1,84 @@
+{% extends 'cours/base-front.html.twig' %}
+
+{% block body %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>9arini</title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('/front/Search/assets/favicon.ico')}}" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('front/acceuil/assets/favicon.ico')}}" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('front/acceuil/assets/favicon.ico')}}" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
+
+        <style>
+            #calendrier{
+                width: 80%;
+                margin: auto;
+            }
+        </style>
+    </head>
+    <body>
+
+    <div class="container px-4 px-lg-5 mt-5">
+
+    <section class="py-5">
+
+        <button  type="button"><a href="{{ path('calendar_new') }}">Ajouter un evenement</a></button>
+
+        <div id="calendrier">
+        </div>
+
+        <script>
+            window.onload = () => {
+                let calendarElt = document.querySelector("#calendrier")
+                let calendar = new FullCalendar.Calendar(calendarElt, {
+
+
+
+                    initialView: 'timeGridWeek',
+                    locale: 'fr',
+                    timeZone: 'Europe/Paris',
+                    headerToolbar: {
+                        start: 'prev,next today',
+                        center: 'title',
+                        end: 'dayGridMonth,timeGridWeek'
+                    },
+                    events: {{ data|raw }},
+                    editable: true,
+                    eventResizableFromStart: true
+                })
+                calendar.on('eventChange', (e) => {
+                    let url = `/api/${e.event.id}/edit`
+                    let donnees = {
+                        "title": e.event.title,
+                        "description": e.event.extendedProps.description,
+                        "start": e.event.start,
+                        "end": e.event.end,
+                        "backgroundColor": e.event.backgroundColor,
+                        "borderColor": e.event.borderColor,
+                        "textColor": e.event.textColor,
+                        "allDay": e.event.allDay
+                    }
+
+                    let xhr = new XMLHttpRequest
+                    xhr.open("PUT", url)
+                    xhr.send(JSON.stringify(donnees))
+                })
+                calendar.render()
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.js" integrity="sha256-DBxkGZLxKsLKhz054qUpBqtotG00r9AELGpSigJujLg=" crossorigin="anonymous"></script>
+
+    </section>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('/front/Search/js/scripts.js')}}
+"></script>
+    </body>
+    </html>
+{% endblock %}
