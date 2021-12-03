@@ -1,0 +1,75 @@
+{% extends 'personnes/indexuser.html.twig' %}
+{% block body %}
+<br>
+    <br>
+
+    {{ form_start(form) }}
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <center><h2 class="card-title"> Ajouter un Quiz</h2></center>
+                <p class="card-description">
+                </p>
+                <div class="form-group">
+                    <label for="exampleInputCity1">Quiz Name</label>
+                    {{ form_widget(form.idquiz, { 'attr': {'class': 'form-control'} }) }}
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Question</label>
+                    {{ form_widget(form.question, { 'attr': {'class': 'form-control'} }) }}
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Option 1</label>
+                    {{ form_widget(form.option1, { 'attr': {'class': 'form-control'} }) }}
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Option 2</label>
+                    {{ form_widget(form.option2, { 'attr': {'class': 'form-control'} }) }}
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Option 3</label>
+                    {{ form_widget(form.option3, { 'attr': {'class': 'form-control'} }) }}
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Option 4</label>
+                    {{ form_widget(form.option4, { 'attr': {'class': 'form-control'} }) }}
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Reponse</label>
+                    {{ form_widget(form.reponse, { 'attr': {'class': 'form-control'} }) }}
+                </div>
+                <br>
+                <center>
+                    <input type="submit" value="Valider" class="submit"/>
+                </center>
+                <style>
+                    .submit {
+                        margin-top: 40px;
+                        margin-bottom: 20px;
+                        background:  #E66207;
+                        text-transform: uppercase;
+                        display: block;
+                        margin: 0 auto;
+                        width: 200px;
+                        height: 36px;
+                        border-radius: 30px;
+                        color: #fff;
+                        font-size: 15px;
+                        cursor: pointer;
+                    }
+
+
+                </style>
+
+                {{ form_end(form) }}
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends 'cours/base-front.html.twig' %}
+
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>{{ cours.nomcours }}</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('/front/Search/assets/favicon.ico')}}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('front/acceuil/assets/favicon.ico')}}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('front/acceuil/assets/favicon.ico')}}" />
+
+</head>
+<body>
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <img src="{{ asset('/front/web/images/')}}{{ cours.coursImg }}" width="100"  />
+        <div align="right">   <a href="{{ path('certif')}}" class="submit">  imprimer</a> </div>
+
+            <div> <center><h1>{{ cours.nomcours }} </h1></center></div>
+
+
+<hr>
+        <h3>Description</h3>
+        {{ cours.description }}
+    <br>
+        <br>
+        <br>
+       <hr>
+
+            {% for chapitre in cours.chapitre %}
+<aside>
+
+
+                        <div align="left"> <h5> {{ chapitre.getChapitrenom}}</h5> </div>
+</aside>
+<article  align="right">
+
+
+                <video  id="example_video_1" class="video-js vjs-default-skin"
+                       controls preload="auto" width="900" height="500"
+                       poster="http://video-js.zencoder.com/oceans-clip.png"
+                       data-setup='{"example_option":true}'>
+
+
+                <source src="{{ asset('/front/web/images/')}}{{ chapitre.getImage}}" type='video/mp4' />
+
+                </video>
+    <hr>
+    <td>  <a href="{{ path('pdf2',{'id': chapitre.id}) }}"> PDF</a></td>
+
+</article>
+                           {% endfor %}
+
+
+
+
+
+
+<br>
+<br>
+
+
+
+
+    </div>
+    </div>
+    <br>
+    <br> <br>
+    <br> <br>
+    <br> <br>
+    <br> <br>
+    <br> <br>
+    <br> <br>
+    <br>
+</section>
+
+
+
+
+
+
+
+</body>
+</html>
+{% endblock %}

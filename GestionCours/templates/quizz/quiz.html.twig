@@ -1,0 +1,105 @@
+{% extends 'cours/base-front.html.twig' %}
+
+{% block body %}
+    <div class="imgpub">
+
+    </div>
+    <br>
+    <br>
+    <center>
+        <form action="{{ path('res', {'id' : idquiz}) }}" method="post">
+
+
+
+
+
+            {% for question in questions %}
+                <p class="normal">
+                    {{question.question}} :</p> <br>
+
+                <input type="radio" name="rep{{i}}" value={{question.option1}}>{{question.option1}} <br>
+                <input type="radio" name="rep{{i}}" value={{question.option2}}>{{question.option2}} <br>
+                <input type="radio" name="rep{{i}}" value={{question.option3}}>{{question.option3}} <br>
+                <input type="radio" name="rep{{i}}" value={{question.option4}}>{{question.option4}} <br>
+
+                <input type="radio" name="rep{{i}}" value={{question.reponse}} hidden> <br>
+                <hr class="dashed">
+
+                {% set i = i + 1 %}
+            {% endfor %}
+            <input type="text" name="res" id="res" hidden>
+            <input type="submit" value="Résultat" onclick="f({{n}})" class="submit">
+        </form>
+    </center>
+
+    <script>
+        function f( x) {
+            var res = document.getElementById('res');
+            var k = 0 ;
+            for (let i = 0; i < x; i++) {
+                l = i+1;
+                name = "rep"+l
+                var e = document.getElementsByName(name);
+                for (let j = 0; j < 4; j++) {
+
+                    if (e[j].checked)
+                        if(e[j].value == e[4].value)
+                            k = k+1;
+                }
+            }
+
+            res.value = k;
+        }
+    </script>
+    <style>
+        .submit {
+            margin-top: 40px;
+            margin-bottom: 20px;
+            background:  #0080ff;
+            text-transform: uppercase;
+            display: block;
+            margin: 0 auto;
+            width: 200px;
+            height: 36px;
+
+            color: #fff;
+            font-size: 15px;
+            cursor: pointer;
+        }
+        hr.dashed {
+            border-top: 3px dashed #bbb;
+        }
+        .normal {
+            font-style: oblique;
+            font-weight: bold;
+        }
+
+        .radio-button {
+            margin: 15px;
+        }
+        .radio-button input[type="radio"] {
+            opacity: 0;
+            position: fixed;
+            width: 0;
+        }
+        .radio-button label {
+            display: inline-block;
+            background-color: #d1d1d1;
+            padding: 10px 20px;
+            font-family: sans-serif, Arial;
+            font-size: 16px;
+            border: 1px solid #666;
+            border-radius: 4px;
+        }
+        .radio-button label:hover {
+            background-color: #b1e3c1;
+        }
+        .radio-button input[type="radio"]:focus + label {
+            border: 2px dashed #666;
+        }
+        .radio-button input[type="radio"]:checked + label {
+            background-color: #76cf9f;
+            border-color: #666;
+        }
+    </style>
+{% endblock %}
