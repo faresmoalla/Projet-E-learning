@@ -152,6 +152,11 @@ class Utilisateur implements UserInterface,EquatableInterface
      */
     private $entrepreneurusage;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $note;
+
 
 
 
@@ -446,5 +451,17 @@ class Utilisateur implements UserInterface,EquatableInterface
         }
 
         return true;
+    }
+
+    public function getNote(): ?int
+    {
+        return $this->note;
+    }
+
+    public function setNote(?int $note): self
+    {
+        $this->note = $note;
+
+        return $this;
     }
 }

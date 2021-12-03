@@ -7,6 +7,7 @@ use App\Entity\Utilisateur;
 use App\Form\NoteType;
 use App\Form\NoteUtilisateurType;
 use App\Repository\NoteRepository;
+use App\Repository\UtilisateurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -73,4 +74,83 @@ class NoteController extends AbstractController
         $em->flush();
         return $this->redirectToRoute("note");
     }
+    /**
+     * @Route("/moyennenote",name="moyennenote")
+     */
+    public function moyenne(NoteRepository $repo,UtilisateurController $uti)
+    {   /*
+        $Note= $this->getDoctrine()->getRepository(Note::class)->findAll();
+        foreach ($Note as $n){
+            $utilisateur=$n->getUtilisateur()->getId();
+            $note=$n->getNotevaleur();
+            $nb=0;
+            while($n->getUtilisateur()->getId()==$utilisateur){
+                $nb++;
+                $note+=($note+$n->getNotevaleur())/$nb;
+                $n->getUtilisateur()->setNote($note);
+            }
+        }
+
+        return $this->render("note/dashboardnote.html.twig");*/
+        $notes= $repo->findAll();
+        foreach($notes as $n ){
+            $utilisateurid=$n->getUtilisateur()->getId();
+
+
+            foreach($notes as $n){
+                $moy=0;
+                $nb=0;
+                while($n->getId()==$utilisateurid){
+
+                    $nb++;
+
+                    $note=$n->getNotevaleur();
+                    $moy=($moy+$note)/$nb;
+                    $n->getUtilisateur()->setNote($moy);
+                    $em= $uti->getDoctrine()->getManager();
+                    $em->flush();
+
+                }
+
+            }
+        }
+        $utilisateurss=$uti->getDoctrine()->getRepository(Utilisateur::class)
+            ->findAll();
+        $utilisateurs= [];
+        foreach($utilisateurss as $utilisateurs ){
+            $note[]=$utilisateurs->getNote();
+            $utilisateurcount[]= $utilisateurs->getId();
+        }
+
+
+        return $this->render('note/moyennenote.html.twig',
+            [
+                'note' => json_encode($note),
+                'utilisateurcount' => json_encode($utilisateurcount), 'base2' => 'base2'
+            ]);
+
+    }
+
+
+    /**
+     * @Route("/stat", name="stat")
+     */
+    public function statAction(NoteRepository $repo)
+    {
+        $utilisateurss= $repo->findAll();
+        $utilisateurs= [];
+        foreach($utilisateurss as $utilisateurs ){
+            $note[]=$utilisateurs->getNotevaleur();
+            $utilisateurcount[]= $utilisateurs->getUtilisateur()->getId();
+        }
+
+        return $this->render('note/dashboardnote.html.twig',
+            [
+                'note' => json_encode($note),
+                'utilisateurcount' => json_encode($utilisateurcount), 'base2' => 'base2'
+            ]);
+
+
+    }
+
 }

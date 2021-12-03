@@ -28,7 +28,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use function PHPUnit\Framework\equalTo;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+
+
 
 
 
@@ -314,6 +316,30 @@ class UtilisateurController extends AbstractController
             );
         }
     }
+
+    public function findStudentByEmail($email){
+        return $this->createQueryBuilder('utilisateur')
+            ->where('utilisateur.utilisateurAdresseEmail LIKE :email')
+            ->setParameter('nsc', '%'.$email.'%')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @Route("/searchUtilisateur ", name="searchUtilisateur")
+     */
+    public function searchUtilisateur(Request $request,NormalizerInterface $Normalizer)
+    {
+        $repository = $this->getDoctrine()->getRepository(Utilisateur::class);
+        $requestString=$request->get('searchValue');
+        $utilisateur = $repository->findStudentByEmail($requestString);
+        $jsonContent = $Normalizer->normalize($utilisateur, 'json',['groups'=>'utilisateurs']);
+        $retour=json_encode($jsonContent);
+        return new Response($retour);
+
+    }
+
+
 
 
 

@@ -371,13 +371,13 @@
 
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
-
+                    {% block body %}
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">les Utilisateurs</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            {% block body %}
+
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
@@ -858,10 +858,10 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            {% endblock %}
+
                         </div>
                     </div>
-
+                    {% endblock %}
                 </div>
 
             </div>
