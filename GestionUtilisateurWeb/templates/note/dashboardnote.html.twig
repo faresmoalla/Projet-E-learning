@@ -35,10 +35,10 @@
         let categGraph = new Chart(categories, {
             type: "pie",
             data: {
-                labels: {{ note|raw }},
+                labels: {{ utilisateurcount|raw }},
                 datasets: [{
                     label: "Répartition des catégories",
-                    data: {{ utilisateurcount|raw }},
+                    data: {{ note|raw }},
                     backgroundColor: ["black","green","blue","red","yellow","brown","pink","white"]
 
                 }  ]

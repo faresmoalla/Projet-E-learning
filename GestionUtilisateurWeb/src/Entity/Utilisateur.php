@@ -153,7 +153,7 @@ class Utilisateur implements UserInterface,EquatableInterface
     private $entrepreneurusage;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      */
     private $note;
 
@@ -453,12 +453,12 @@ class Utilisateur implements UserInterface,EquatableInterface
         return true;
     }
 
-    public function getNote(): ?int
+    public function getNote(): ?float
     {
         return $this->note;
     }
 
-    public function setNote(?int $note): self
+    public function setNote(?float $note): self
     {
         $this->note = $note;
 

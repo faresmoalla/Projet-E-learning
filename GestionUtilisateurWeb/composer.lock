@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ace55ee3e3d9aa3c242426d073ba8775",
+    "content-hash": "461467ce7a5f8511add8cc05f5c4eb19",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -1787,6 +1787,52 @@
                 }
             ],
             "time": "2021-09-03T17:53:30+00:00"
+        },
+        {
+            "name": "mercuryseries/flashy-bundle",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mercuryseries/flashy-bundle.git",
+                "reference": "a92dec77e2c62ae5c9a576b89d119354e5597eef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mercuryseries/flashy-bundle/zipball/a92dec77e2c62ae5c9a576b89d119354e5597eef",
+                "reference": "a92dec77e2c62ae5c9a576b89d119354e5597eef",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.3",
+                "symfony/config": "^3.4 || ^4.0 || ^5.0",
+                "symfony/dependency-injection": "^3.4 || ^4.0 || ^5.0",
+                "symfony/http-kernel": "^3.4 || ^4.0 || ^5.0"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "^3.4 || ^4.0 || ^5.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "MercurySeries\\FlashyBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Honore Hounwanou",
+                    "email": "mercuryseries@gmail.com"
+                }
+            ],
+            "description": "Easy flash notifications in Symfony",
+            "support": {
+                "issues": "https://github.com/mercuryseries/flashy-bundle/issues",
+                "source": "https://github.com/mercuryseries/flashy-bundle/tree/master"
+            },
+            "time": "2019-11-28T01:07:50+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -7435,16 +7481,16 @@
         },
         {
             "name": "twilio/sdk",
-            "version": "6.31.1",
+            "version": "6.31.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twilio/twilio-php.git",
-                "reference": "b3788dd0171bc8037206c6760174315bbe9c3443"
+                "reference": "be59275f0fc311cb45d5303d47bffaa06a19d6e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twilio/twilio-php/zipball/b3788dd0171bc8037206c6760174315bbe9c3443",
-                "reference": "b3788dd0171bc8037206c6760174315bbe9c3443",
+                "url": "https://api.github.com/repos/twilio/twilio-php/zipball/be59275f0fc311cb45d5303d47bffaa06a19d6e5",
+                "reference": "be59275f0fc311cb45d5303d47bffaa06a19d6e5",
                 "shasum": ""
             },
             "require": {
@@ -7483,9 +7529,9 @@
             ],
             "support": {
                 "issues": "https://github.com/twilio/twilio-php/issues",
-                "source": "https://github.com/twilio/twilio-php/tree/6.31.1"
+                "source": "https://github.com/twilio/twilio-php/tree/6.31.2"
             },
-            "time": "2021-11-17T20:15:02+00:00"
+            "time": "2021-12-01T22:34:49+00:00"
         },
         {
             "name": "webmozart/assert",

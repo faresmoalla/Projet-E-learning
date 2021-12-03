@@ -29,6 +29,7 @@ use function PHPUnit\Framework\equalTo;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use MercurySeries\FlashyBundle\FlashyNotifier;
 
 
 
@@ -119,13 +120,15 @@ class UtilisateurController extends AbstractController
     /**
      * @Route("/supprimerUtilisateur/{id}",name="supprimerUtilisateur")
      */
-    public function delete($id)
+    public function delete(FlashyNotifier $flashy,$id)
     {
         $club= $this->getDoctrine()->getRepository(Utilisateur::class)
             ->find($id);
         $em= $this->getDoctrine()->getManager();
         $em->remove($club);
         $em->flush();
+        $flashy->success('utilisateur supprimé avec succés ');
+
         return $this->redirectToRoute("AfficheUtilisateurs");
     }
 
@@ -320,7 +323,7 @@ class UtilisateurController extends AbstractController
     public function findStudentByEmail($email){
         return $this->createQueryBuilder('utilisateur')
             ->where('utilisateur.utilisateurAdresseEmail LIKE :email')
-            ->setParameter('nsc', '%'.$email.'%')
+            ->setParameter('email', '%'.$email.'%')
             ->getQuery()
             ->getResult();
     }

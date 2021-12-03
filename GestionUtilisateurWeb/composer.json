@@ -10,6 +10,7 @@
         "doctrine/doctrine-bundle": "^2.4",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.10",
+        "mercuryseries/flashy-bundle": "3.0",
         "phpdocumentor/reflection-docblock": "^5.3",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/asset": "4.4.*",
@@ -93,12 +94,6 @@
             "allow-contrib": false,
             "require": "4.4.*"
         }
-    },
-    "require": {
-        "twilio/sdk": "^5.0"
     }
 
 }
-
-
-

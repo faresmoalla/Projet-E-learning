@@ -1,9 +1,9 @@
 {% extends 'base-back.html.twig' %}
 {% block body %}
 
-
+    <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
     <input id="search">
-    <table class="table" border="1">
+    <table class="table" border="1" id="t" >
     <thead>
     <tr>
         <th scope="col">modifier</th>
@@ -62,9 +62,17 @@
     </tr>{% endfor %}
 
     </tbody>
+        <tbody id="search">
+        </tbody>
+
     </table>
 
-
+    <!-- Flashy depends on jQuery -->
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- Load Flashy default JavaScript -->
+    <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+    <!-- Include Flashy default partial -->
+    {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
@@ -91,12 +99,12 @@
                         $('#t tbody#search').empty();
                         $.each(JSON.parse(retour), function(i, obj) {
                             $('#t tbody#all').hide();
-                            $('#t tbody#search').append('<tr><td> '+obj.id+'  </td><td>    '+obj.utilisateurprenom+'  </td><td>'+obj.utilisateurnom+' </td>' +
+                            $('#t tbody#search').append('<td><a href="modifierUtilisateur/'+obj.id+'">modifier</a> </br><a href="supprimerUtilisateur/'+obj.id+'">supprimer</a></td><tr><td> '+obj.id+'  </td><td>    '+obj.utilisateurprenom+'  </td><td>'+obj.utilisateurnom+' </td>' +
                                 '<td> '+obj.utilisateurgenre+'  </td><td> '+obj.utilisateuradresse+'  </td><td> '+obj.utilisateurpays+'  </td><td> '+obj.utilisateurphone+'  </td>' +
                                 '<td> '+obj.utilisateurfonction+'  </td><td>    '+obj.utilisateurorganisme+'  </td><td> '+obj.utilisateursavoiretre+'  </td><td>    '+obj.utilisateuradresseemail+'  </td>' +
                                 '<td> '+obj.utilisateurmdp+'  </td><td>    '+obj.utilisateurrole+'  </td>' +
                                 '<td> '+obj.nomentreprise+'  </td><td>    '+obj.entrepreneursiteweb+'  </td>' +
-                                '<td> '+obj.entrepreneurusage+'  </td><td>    '+obj.utilisateurpdp+'  </td></tr>');
+                                '<td> '+obj.entrepreneurusage+'  </td><td>    '+obj.utilisateurpdp+'  </td><td>    '+obj.note+'  </td></tr>');
 
                     });
                     }

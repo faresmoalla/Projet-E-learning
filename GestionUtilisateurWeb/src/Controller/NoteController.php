@@ -96,36 +96,45 @@ class NoteController extends AbstractController
         foreach($notes as $n ){
             $utilisateurid=$n->getUtilisateur()->getId();
 
-
+            $moy=0;
+            $nb=0;
+            $s=0;
             foreach($notes as $n){
-                $moy=0;
-                $nb=0;
-                while($n->getId()==$utilisateurid){
+
+                if($n->getUtilisateur()->getId()==$utilisateurid){
 
                     $nb++;
 
                     $note=$n->getNotevaleur();
-                    $moy=($moy+$note)/$nb;
-                    $n->getUtilisateur()->setNote($moy);
-                    $em= $uti->getDoctrine()->getManager();
-                    $em->flush();
+                    $s=($s+$note);
+
+
 
                 }
 
             }
+            $moy=$s/$nb;
+
+            $u=  $n->getUtilisateur();
+            $u->setNote($moy);
+            $em= $uti->getDoctrine()->getManager();
+
+            $em->persist($u);
+            $em->flush();
+            var_dump($moy);
         }
         $utilisateurss=$uti->getDoctrine()->getRepository(Utilisateur::class)
             ->findAll();
-        $utilisateurs= [];
+        $final[$moy]=array();
         foreach($utilisateurss as $utilisateurs ){
-            $note[]=$utilisateurs->getNote();
-            $utilisateurcount[]= $utilisateurs->getId();
+            $final[$moy][]=$utilisateurs->getNote();
+            $utilisateurcount[]= $utilisateurs->getUtilisateuradresseemail();
         }
 
 
         return $this->render('note/moyennenote.html.twig',
             [
-                'note' => json_encode($note),
+                'note' => json_encode($final[$moy]),
                 'utilisateurcount' => json_encode($utilisateurcount), 'base2' => 'base2'
             ]);
 
