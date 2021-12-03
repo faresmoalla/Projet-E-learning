@@ -2,10 +2,12 @@
 {% block body %}
 
 
-
+    <input id="search">
     <table class="table" border="1">
     <thead>
     <tr>
+        <th scope="col">modifier</th>
+        <th scope="col">supprimer</th>
         <th scope="col">id</th>
         <th scope="col">prenom</th>
         <th scope="col">nom</th>
@@ -23,10 +25,11 @@
         <th scope="col">entrepreneur site web</th>
         <th scope="col">entrepreneur usage</th>
         <th scope="col">image</th>
+        <th scope="col">note</th>
     </tr>
     </thead>
 
-    <tbody>
+    <tbody id="all">
     <tr>{% for u in Utilisateurs  %}
         <td><a href="{{ path('modifierUtilisateur',{'id': u.id}) }}">Modifier</a></td>
         <td><a href="{{ path('supprimerUtilisateur',{'id': u.id}) }}">Supprimer</a></td>
@@ -48,7 +51,11 @@
         <td>{{ u.nomentreprise }}</td>
         <td>{{ u.entrepreneursiteweb }}</td>
         <td>{{ u.entrepreneurusage }}</td>
-        <td><img src="{{ asset('/front/web/images/')}}{{ u.utilisateurpdp }}" width="100"  /></td>
+        <td><img src="{{ asset('C:/wamp64/www/image')}}{{ u.utilisateurpdp }}" width="100"  /></td>
+        <td>{{ u.note }}</td>
+
+
+
 
 
 
@@ -58,4 +65,51 @@
     </table>
 
 
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+
+<script>
+    $( document ).ready(function() {
+        $("#search").keyup(function(e){
+            /* La variable value va prendre la valeur insérer dans le champ de texte afin d’effectuer la recherche */
+            var value = $(this).val();
+            /* Ajax est lancé lors du remplissage du champ texte dont l’id est « search » pour faire la recherche */
+            $.ajax({
+                /* l’url est une chaine de caractères contenant l’adresse où la requête est envoyée */
+                url : "{{ path('searchUtilisateur') }}",
+                /* La méthode utilisée pour transférer les données est GET */
+                type : 'GET',
+                /*Ici search value va prendre la chaine entrée par un utilisateur dans la zone de recherche et sera placée après l’url */
+                data: {
+                    'searchValue' : value
+                },
+                /*Cette fonction permet de vider le contenu du tableau pour recevoir le nouveau contenu*/
+                success : function(retour){
+                    if(retour){
+                        $('#t tbody#search').empty();
+                        $.each(JSON.parse(retour), function(i, obj) {
+                            $('#t tbody#all').hide();
+                            $('#t tbody#search').append('<tr><td> '+obj.id+'  </td><td>    '+obj.utilisateurprenom+'  </td><td>'+obj.utilisateurnom+' </td>' +
+                                '<td> '+obj.utilisateurgenre+'  </td><td> '+obj.utilisateuradresse+'  </td><td> '+obj.utilisateurpays+'  </td><td> '+obj.utilisateurphone+'  </td>' +
+                                '<td> '+obj.utilisateurfonction+'  </td><td>    '+obj.utilisateurorganisme+'  </td><td> '+obj.utilisateursavoiretre+'  </td><td>    '+obj.utilisateuradresseemail+'  </td>' +
+                                '<td> '+obj.utilisateurmdp+'  </td><td>    '+obj.utilisateurrole+'  </td>' +
+                                '<td> '+obj.nomentreprise+'  </td><td>    '+obj.entrepreneursiteweb+'  </td>' +
+                                '<td> '+obj.entrepreneurusage+'  </td><td>    '+obj.utilisateurpdp+'  </td></tr>');
+
+                    });
+                    }
+                    else
+                    {
+                        $('#t tbody#all').show();
+                        $('#t tbody#search').empty();
+                        $('#t tbody#search').fadeIn('fast');
+                    }
+                },
+            });
+            return false;
+        });
+    });
+</script>
 {% endblock %}
