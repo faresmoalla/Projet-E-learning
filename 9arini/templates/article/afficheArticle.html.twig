@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} ARTICLE {% endblock %}
+{% block body %}
+
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <h1 class="h3 mb-2 text-gray-800">ARTICLE</h1>
+
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Liste des article</h6>
+
+
+                    </div>
+
+                    <div class="card-body">
+
+
+
+
+                            {% for message in app.flashes('info') %}
+                                  <div class="alert alert-success">
+                                    {{ message }}
+                                  </div>
+                                     {% endfor %}
+
+                                   {% for f in tableArticle %}
+
+
+                                        <div class="card-header py-3" >
+                                            {{ f.id  }}
+                                        </div>
+                                           <div class="col-lg-4">
+                                         <div  class="card-header py-3" >
+                                         <a class="text-muted mb-5" href="{{ path('get_article', {id:f.id}) }}">{{ f.content }}</a>
+                                         </div>
+
+
+
+                                         </div>
+                                           <div class="col-lg-4">
+                                        <div class="card-header py-3">
+
+                                           {{ f.object  }}
+                                         </div>
+                                           </div>
+                                       <div>
+                                           <a  href="{{path('add_like',{articleId:f.id} ) }}">like</a>
+
+S
+
+                                               <a  href="{{path('add_dislike',{articleId:f.id} ) }}">dislike</a>
+                                       </div>
+
+                                         {% endfor %}
+
+
+
+
+                            <button class="btn btn-light btn-icon-split"  type="button"><a href="{{ path('ajoutarticle') }}">Ajouter</a></button>
+
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+{% endblock %}
+
