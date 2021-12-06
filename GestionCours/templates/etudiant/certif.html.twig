@@ -1,0 +1,56 @@
+<body>
+<div id='1'/>
+<h1>
+    <center>
+        <h2>Félicitations</h2>
+
+        <img  width='10 %' src='https://mustaphabenhadjyahia.github.io/img/esprit.jpg',  ><br>
+        Vous avez passez le test
+
+
+        {% for i in questions  %}
+
+
+            <h1> {{ i.cours_id }}  </h1>
+
+
+        {% endfor %}
+
+        <h2>    Bien débuter avec Spring        </h2>
+
+        {% if qrCode2 %}
+            <img width="130" src="{{ qrCode2 }}" alt="qr-code">
+        {% endif %}    </center>
+
+</h1>
+<style>
+    body {
+        background-color: #5DCAEF;
+
+    }
+    #1{
+        border-style : solid;
+        display : inline-block;
+        height : 0;
+        width : 0;
+        border-top : 80px solid brown;
+        border-right : 180px solid transparent;
+        border-left : 180px solid transparent;
+    }
+    .style{
+        max-width: 200px;
+        height: 83px;
+        alignment:left;
+    }
+    .esprit{
+        width: 10%;
+        display : inline-block;
+        border-right : 180px solid transparent;
+        border-left : 180px solid transparent;
+        border-top : 80px solid transparent;
+
+
+
+    }
+</style>
+</body>

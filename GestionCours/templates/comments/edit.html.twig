@@ -1,0 +1,10 @@
+{% extends 'cours/base-front.html.twig' %}
+
+{% block body %}
+    <h1>Edit Comment</h1>
+
+    {{ include('article/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('affichearticle') }}">back to list</a>
+
+{% endblock %}

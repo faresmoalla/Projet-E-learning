@@ -1,0 +1,80 @@
+{% extends 'cours/base-front.html.twig' %}
+{% block title %} ARTICLE {% endblock %}
+{% block body %}
+
+<br>
+    <br>
+    <br><br><br>
+
+
+
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800">ARTICLE</h1>
+
+        <div class="card shadow mb-4">
+
+
+            <div class="card-body">
+
+
+
+
+                {% for message in app.flashes('info') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+                {% for f in tableArticle %}
+
+
+
+                    <div class="col-lg-4">
+                        <div  class="card-header py-3" >
+                            <a  href="{{ path('get_article', {id:f.id}) }}">{{ f.content }}</a>
+                        </div>
+
+
+
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card-header py-3">
+
+                            {{ f.object  }}
+                        </div>
+                    </div>
+                    <div >
+<pre><a  href="{{path('add_like',{articleId:f.id} ) }}">  <img   width="30" src="https://cdn-icons-png.flaticon.com/512/126/126473.png">   <a  href="{{path('add_dislike',{articleId:f.id} ) }}"> <img   width="30" src="https://cdn-icons-png.flaticon.com/512/126/126504.png"></a></a>
+  {{ f.nbLikes }}        {{ f.nbDislike }}
+  </pre>
+
+
+
+                    </div>
+
+                    {% if f.utilisateur.id == currentUser %}
+                        <a href="{{ path('article_delete', {'id': f.id}) }}" ><img src="https://img.icons8.com/color/48/000000/trash--v2.png"/></a>
+                        <a href="{{ path('article_edit', {'id': f.id}) }}" ><img width="30" src="https://cdn-icons-png.flaticon.com/512/1159/1159633.png"/></a>
+                    {% endif %}
+
+
+
+                {% endfor %}
+
+
+
+
+                <button class="btn btn-light btn-icon-split"  type="button"><a href="{{ path('ajoutarticle') }}">Ajouter</a></button>
+
+
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container-fluid -->
+
+    </div>
+{% endblock %}
+
