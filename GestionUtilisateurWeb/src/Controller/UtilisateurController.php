@@ -10,6 +10,7 @@ header('http://127.0.0.1/login');
 exit();*/
 
 
+use App\Form\AdminType;
 use Twilio\Rest\Client;
 use App\Entity\Utilisateur;
 use App\Form\EntrepreneurType;
@@ -89,6 +90,7 @@ class UtilisateurController extends AbstractController
             $em->persist($Utilisateur );
             $em->flush();
             $this->getDoctrine()->getManager()->flush();
+            /*
             $account_sid = 'AC04fedb666177e902b410a42d0b4614b9';
             $auth_token = 'e19969ecb5f0279d8539e03f2c414f40';
             $client = new Client($account_sid, $auth_token);
@@ -98,6 +100,7 @@ class UtilisateurController extends AbstractController
                 ->create($n, "sms");
 
             print($verification->status);
+
             $user_params = [
                 'utilisateurprenom' => $request->request->get('utilisateurprenom'),
                 'utilisateurnom' => $request->request->get('utilisateurnom'),
@@ -110,8 +113,8 @@ class UtilisateurController extends AbstractController
                 'authy_id' => $Utilisateur->getId(),
             ];
 
-            $this->get('session')->set('user', $user_params);
-            return $this->render("utilisateur/verify.html.twig");
+            $this->get('session')->set('user', $user_params);*/
+            return $this->render("security/login.html.twig");
 
 
         }
@@ -141,39 +144,29 @@ class UtilisateurController extends AbstractController
      */
     public function update(Request $request, $id,UserPasswordEncoderInterface $passwordEncoder)
     {
-        $session =  $_SESSION  ; //$request->getSession();
-        $session->start();
-        $session->save();
         $Utilisateur = $this->getDoctrine()->getRepository(Utilisateur::class)->find($id);
-
-        //$Utilisateur=$this->getUser();
-        //$session->set('user', $Utilisateur);
-
-
-        $Utilisateur->setutilisateurmdp("");
         if(strcmp($Utilisateur->getUtilisateurrole(),"Membre")==0) {
             $form = $this->createForm(MembreType::class, $Utilisateur);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
-                $Utilisateur->setUtilisateurmdp(
-                    $passwordEncoder->encodePassword(
-                        $Utilisateur,
-                        $form->get('utilisateurmdp')->getData()
-                    )
-                );
-                $imageFile = $form->get('utilisateurpdp')->getData();
-                if ($imageFile) {
-                    $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-                    $newFilename = $originalFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
-                    try {
-                        $imageFile->move(
-                            'front\web\images',
-                            $newFilename
-                        );
-                    } catch (FileException $e) {
-                    }
-                    $Utilisateur->setutilisateurpdp($newFilename);
-                }
+                //recuperation des images transmises
+                $image = $form->get('utilisateurpdp')->getData();
+                // Boucle sur les images
+
+                    // on genere un nouveau nom de fichier avec md5. guessExtension recupere l'extension du fichier
+                    $fichier = md5(uniqid()) . '.' . $image->guessExtension();
+                    //On copie le fichier dans le dossier upload
+                    $image->move(
+                        $this->getParameter('upload_directory'),
+                        $fichier
+                    );
+
+                    // on stocke l'image dans la bdd (son nom)
+
+                $Utilisateur->setUtilisateurpdp($fichier);
+
+
+
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
                 return $this->redirectToRoute("acceuil");
@@ -185,12 +178,21 @@ class UtilisateurController extends AbstractController
             $form = $this->createForm(FormateurType::class, $Utilisateur);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
-                $Utilisateur->setUtilisateurmdp(
-                    $passwordEncoder->encodePassword(
-                        $Utilisateur,
-                        $form->get('utilisateurmdp')->getData()
-                    )
+                //recuperation des images transmises
+                $image = $form->get('utilisateurpdp')->getData();
+                // Boucle sur les images
+
+                // on genere un nouveau nom de fichier avec md5. guessExtension recupere l'extension du fichier
+                $fichier = md5(uniqid()) . '.' . $image->guessExtension();
+                //On copie le fichier dans le dossier upload
+                $image->move(
+                    $this->getParameter('upload_directory'),
+                    $fichier
                 );
+
+                // on stocke l'image dans la bdd (son nom)
+                $Utilisateur->setUtilisateurpdp($fichier);
+
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
                 return $this->redirectToRoute("acceuil");
@@ -201,56 +203,50 @@ class UtilisateurController extends AbstractController
             $form = $this->createForm(EntrepreneurType::class, $Utilisateur);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
-                $Utilisateur->setUtilisateurmdp(
-                    $passwordEncoder->encodePassword(
-                        $Utilisateur,
-                        $form->get('utilisateurmdp')->getData()
-                    )
+
+                //recuperation des images transmises
+                $image = $form->get('utilisateurpdp')->getData();
+                // Boucle sur les images
+
+                // on genere un nouveau nom de fichier avec md5. guessExtension recupere l'extension du fichier
+                $fichier = md5(uniqid()) . '.' . $image->guessExtension();
+                //On copie le fichier dans le dossier upload
+                $image->move(
+                    $this->getParameter('upload_directory'),
+                    $fichier
                 );
-                $imageFile = $form->get('utilisateurpdp')->getData();
-                if ($imageFile) {
-                    $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-                    $newFilename = $originalFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
-                    try {
-                        $imageFile->move(
-                            'front\web\images',
-                            $newFilename
-                        );
-                    } catch (FileException $e) {
-                    }
-                    $Utilisateur->setutilisateurpdp($newFilename);
-                }
+
+                // on stocke l'image dans la bdd (son nom)
+                $Utilisateur->setUtilisateurpdp($fichier);
+
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
                 return $this->redirectToRoute("acceuil");
             }
             return $this->render("utilisateur/updateEntrepreneur.html.twig", array("formulaire" => $form->createView()));
         }else  {
-            $form = $this->createForm(UtilisateurType::class, $Utilisateur);
+            $form = $this->createForm(AdminType::class, $Utilisateur);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
-                $Utilisateur->setUtilisateurmdp(
-                    $passwordEncoder->encodePassword(
-                        $Utilisateur,
-                        $form->get('utilisateurmdp')->getData()
-                    )
+
+                //recuperation des images transmises
+                $image = $form->get('utilisateurpdp')->getData();
+                // Boucle sur les images
+
+                // on genere un nouveau nom de fichier avec md5. guessExtension recupere l'extension du fichier
+                $fichier = md5(uniqid()) . '.' . $image->guessExtension();
+                //On copie le fichier dans le dossier upload
+                $image->move(
+                    $this->getParameter('upload_directory'),
+                    $fichier
                 );
-                $imageFile = $form->get('utilisateurpdp')->getData();
-                if ($imageFile) {
-                    $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-                    $newFilename = $originalFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
-                    try {
-                        $imageFile->move(
-                            'front\web\images',
-                            $newFilename
-                        );
-                    } catch (FileException $e) {
-                    }
-                    $Utilisateur->setutilisateurpdp($newFilename);
-                }
+
+                // on stocke l'image dans la bdd (son nom)
+                $Utilisateur->setUtilisateurpdp($fichier);
+
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
-                return $this->redirectToRoute("acceuilAdmin");
+                return $this->redirectToRoute("acceuil");
             }
             return $this->render("utilisateur/updateAdmin.html.twig", array("formulaire" => $form->createView()));
         }
@@ -295,15 +291,16 @@ class UtilisateurController extends AbstractController
      * @Route("/verify", name="verify")
      */
     public function verifyCode(Request $request)
-    {   $data = $this->get('session')->get('user');
+    {
         $sid = "AC04fedb666177e902b410a42d0b4614b9";
         $token = "e19969ecb5f0279d8539e03f2c414f40";
         $twilio = new Client($sid, $token);
-        $num=$data['utilisateurphone'];
+        $num=$request->request->get('utilisateurphone');
         $n='+216'.$num;
+        $code=$request->query->get('verify_code');
         $verification_check = $twilio->verify->v2->services("VA43d502871f086dd1dc62cb5fccfef0b2")
             ->verificationChecks
-            ->create($request->query->get('verify_code'), // code
+            ->create($code, // code
                 ["to" => $n]
             );
 
@@ -320,13 +317,7 @@ class UtilisateurController extends AbstractController
         }
     }
 
-    public function findStudentByEmail($email){
-        return $this->createQueryBuilder('utilisateur')
-            ->where('utilisateur.utilisateurAdresseEmail LIKE :email')
-            ->setParameter('email', '%'.$email.'%')
-            ->getQuery()
-            ->getResult();
-    }
+
 
     /**
      * @Route("/searchUtilisateur ", name="searchUtilisateur")
@@ -335,12 +326,13 @@ class UtilisateurController extends AbstractController
     {
         $repository = $this->getDoctrine()->getRepository(Utilisateur::class);
         $requestString=$request->get('searchValue');
-        $utilisateur = $repository->findStudentByEmail($requestString);
+        $utilisateur = $repository->findByutilisateuradresseemail($requestString);
         $jsonContent = $Normalizer->normalize($utilisateur, 'json',['groups'=>'utilisateurs']);
         $retour=json_encode($jsonContent);
         return new Response($retour);
 
     }
+
 
 
 

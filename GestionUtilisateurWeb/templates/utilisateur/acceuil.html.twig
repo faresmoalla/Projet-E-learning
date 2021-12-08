@@ -10,9 +10,21 @@
             border-radius: 50%;
         }
     </style>
+
     <title>9arini{% block title %}index{% endblock %}</title>
     <!-- Favicon-->
     <!-- Animate.css -->
+    <link href="{{ asset('back/amine/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link
+            href="{{ asset('https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i') }}"
+            rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ asset('back/amine/css/sb-admin-2.min.css') }}" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="{{ asset('back/amine/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+
     <link rel="stylesheet" href="{{ asset('front/web/css/animate.css')}}">
     <!-- Icomoon Icon Fonts-->
     <link rel="stylesheet" href="{{ asset('front/web/css/icomoon.css')}}">
@@ -48,18 +60,19 @@
 
 
     <link href="{{ asset('front/acceuil/css/styles.css')}}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body id="page-top">
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
     <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="#page-top">9arini</a>
+        <a class="navbar-brand" href="{{ path('acceuil') }}">9arini</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto my-2 my-lg-0">
                 <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ path('acceuil') }}">Acceuil</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                 {% if "IS_AUTHENTICATED_FULLY" %}
                     {% set user = app.user %}
@@ -67,24 +80,26 @@
                 {% else %}
                     {% set user = "no user connected" %}
                 {% endif %}
-                <p>{{ dump(user) }}</p>
-                <p>{{ dump(session) }}</p>
+
+
 
                     {% set url = absolute_url(asset('')) ~ 'modifierUtilisateur/' ~ user.id %}
                     {% set nom =  user.utilisateurnom %}
 
-
+                <!--
                 <li class="btn-cta"><a href="{{ url }}"><span>{{ nom }} </span></a></li> <pre> </pre>
 
-                    {% set url1 =  '/front/web/images/' ~ user.utilisateurpdp %}
 
-
-                <img src="{{ url1 }}"width="50" height="50" id="img" alt="ajouter photo de profile">
-
-
-
-
-
+                <img src="{{ asset ('/uploads/' ~ user.utilisateurpdp ) }}"width="50" height="50" id="img" >
+                <li class="btn-cta"><a href="{{ path('app_logout') }}"><span>log out </span></a></li> <pre> </pre>
+                -->
+                <div class="dropdown">
+                    <img src="{{ asset ('/uploads/' ~ user.utilisateurpdp ) }}"width="50" height="50" id="img" >
+                    <div class="dropdown-content">
+                        <a href="{{ url }}">{{ user.utilisateurnom }}</a>
+                        <a href="{{ path('app_logout') }}">log out</a>
+                    </div>
+                </div>
 
             </ul>
         </div>

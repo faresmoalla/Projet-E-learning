@@ -34,13 +34,7 @@ class EntrepreneurType extends AbstractType
             ->add('utilisateurphone')
             ->add('utilisateurfonction')
             ->add('utilisateurorganisme')
-            ->add('utilisateuradresseemail')
-            ->add('utilisateurmdp', RepeatedType::class, [
-                'type' => PasswordType::class,
 
-                'first_options'  => ['label' => 'mot de passe '],
-                'second_options' => ['label' => 'confirmer mot de passe'],
-            ])
             ->add('utilisateurrole', ChoiceType::class,[
                 'choices' => [
                     'Membre' => 'Membre',

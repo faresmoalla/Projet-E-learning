@@ -15,6 +15,7 @@ security:
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
+        users_in_memory: { memory: null }
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             entity:
@@ -22,17 +23,19 @@ security:
                 property: email
         # used to reload user from session & other features (e.g. switch_user)
     firewalls:
+
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             anonymous: lazy
-            provider: app_user_provider
+            provider: users_in_memory
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
             logout:
                 path: app_logout
+
                 # where to redirect after logout
                 # target: app_any_route
 

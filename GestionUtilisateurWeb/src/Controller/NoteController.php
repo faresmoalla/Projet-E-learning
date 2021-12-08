@@ -121,7 +121,7 @@ class NoteController extends AbstractController
 
             $em->persist($u);
             $em->flush();
-            var_dump($moy);
+
         }
         $utilisateurss=$uti->getDoctrine()->getRepository(Utilisateur::class)
             ->findAll();

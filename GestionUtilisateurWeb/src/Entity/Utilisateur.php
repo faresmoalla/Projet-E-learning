@@ -17,6 +17,7 @@ use Symfony\Component\Security\Core\User\EquatableInterface;
  */
 class Utilisateur implements UserInterface,EquatableInterface
 {
+
     /**
      * @var int
      *
@@ -156,6 +157,7 @@ class Utilisateur implements UserInterface,EquatableInterface
      * @ORM\Column(type="float", nullable=true)
      */
     private $note;
+
 
 
 
