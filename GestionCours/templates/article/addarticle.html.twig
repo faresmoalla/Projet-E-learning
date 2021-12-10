@@ -1,0 +1,63 @@
+{% extends 'cours/base-front.html.twig' %}
+{% block body %}
+
+    <!DOCTYPE html>
+
+    <html lang="en">
+
+    <body>
+    <br><br><br><br>
+
+
+    <!-- Sidebar -->
+
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+
+
+
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800">Ajouter un Article</h1>
+
+
+        <div class="form-group">
+            {{ form_start(form) }}
+            <div class="form-group">
+                {{ form_widget(form.object  , {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'object'}} ) }}
+            </div>
+            <div class="form-group">
+                {{ form_widget(form.content , {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'content'}} ) }}
+                {{ form_errors(form.content) }}
+            </div>
+            {{ form_widget(form.content , {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'content'}} ) }}
+            {{ form_errors(form.content) }}
+
+
+
+
+        </div>
+
+
+
+
+        <hr>
+        {{ form_end(form) }}
+
+        <hr>
+    </div>
+
+
+
+
+    </body>
+
+
+    <br><br><br><br><br><br><br><br><br><br><br>
+
+
+
+    </html>
+{% endblock %}
