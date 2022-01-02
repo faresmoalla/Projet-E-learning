@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="FenetreChapitres" prefHeight="784.0" prefWidth="1249.0" style="-fx-background-color: #FFF0BC #FFF0BC;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ChapitresGestionController">
+   <children>
+      <TableView fx:id="tablechapitres" layoutX="592.0" layoutY="153.0" prefHeight="373.0" prefWidth="604.0">
+         <columns>
+            <TableColumn fx:id="ChapitreIDD" prefWidth="148.0" text="chapitreID" />
+            <TableColumn fx:id="CoursNommm" minWidth="0.0" prefWidth="131.0" text="CoursNom" />
+            <TableColumn fx:id="chapitrenomm" minWidth="0.0" prefWidth="155.0" text="ChapitreNom" />
+            <TableColumn fx:id="videochapitress" minWidth="0.0" prefWidth="169.0" text="videoChapitre" />
+         </columns>
+      </TableView>
+      <TextField fx:id="FnomChapitree" layoutX="765.0" layoutY="561.0" prefHeight="42.0" prefWidth="303.0" promptText="Nom du chapitre" styleClass="Acropane">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="inputRechcc" layoutX="694.0" layoutY="94.0" prefHeight="37.0" prefWidth="200.0" promptText="Chapitre Nom" />
+      <Button fx:id="supprimerch" layoutX="1089.0" layoutY="91.0" mnemonicParsing="false" onAction="#supprimerrchapitres" prefHeight="42.0" prefWidth="133.0" style="-fx-background-color: #1E7FCB;" text="Supprimer" textFill="WHITE" />
+      <Label layoutX="797.0" layoutY="526.0" text="Ajouter un chapitre" textFill="#a41010">
+         <font>
+            <Font name="High Tower Text" size="29.0" />
+         </font>
+      </Label>
+      <Label layoutX="571.0" layoutY="568.0" text="Nom du chapitre">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <Hyperlink fx:id="returnacceiuilchapitre" layoutX="634.0" layoutY="18.0" onAction="#Returnacceiuilchapitre" prefHeight="42.0" prefWidth="96.0" text="Accueil">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink layoutX="1163.0" layoutY="19.0" prefHeight="40.0" prefWidth="72.0" text="Profil">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink fx:id="precedenttchapitre" layoutX="549.0" layoutY="18.0" onAction="#PrecedentGestionChapitre" prefHeight="42.0" prefWidth="96.0" text="Retour">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Hyperlink>
+      <Label layoutX="562.0" layoutY="98.0" text="Chapitre Nom">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <Button fx:id="modifierChapitres" layoutX="935.0" layoutY="91.0" mnemonicParsing="false" onAction="#ModifierChapitres" prefHeight="42.0" prefWidth="133.0" style="-fx-background-color: #1E7FCB;" text="Modifier" textFill="WHITE" />
+      <Label fx:id="idlabelChapitre" layoutX="628.0" layoutY="543.0" opacity="0.0" text="Label" />
+      <Label fx:id="imgpathchapitre" layoutX="1101.0" layoutY="543.0" text="Label" />
+      <Button fx:id="browsevideochapitre" layoutX="917.0" layoutY="724.0" mnemonicParsing="false" onAction="#AjouterChapitres" prefHeight="40.0" prefWidth="96.0" style="-fx-background-color: #1E7FCB;" text="Ajouter" textFill="WHITE" />
+      <ImageView fx:id="imgajoutchapitre" fitHeight="98.0" fitWidth="118.0" layoutX="1097.0" layoutY="572.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="784.0" fitWidth="549.0" layoutX="-9.0">
+         <image>
+            <Image url="@../Images/0d6fb9b7ef946eb6d34e54ca7a897e89.jpg" />
+         </image>
+      </ImageView>
+      <Button fx:id="ajimg" layoutX="765.0" layoutY="667.0" mnemonicParsing="false" onAction="#Ajouterimggch" prefHeight="42.0" prefWidth="303.0" text="Browse" />
+      <Label layoutX="571.0" layoutY="621.0" text="Nom du Cours">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="571.0" layoutY="674.0" text="Video du chapitre">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <Button fx:id="confirmermodifierChap" layoutX="711.0" layoutY="724.0" mnemonicParsing="false" onAction="#ConfirmerModifierChapitre" prefHeight="40.0" prefWidth="96.0" style="-fx-background-color: #1E7FCB;" text="Confirmer" textFill="WHITE" visible="false" />
+      <Line endX="608.0" endY="-2.0" layoutX="636.0" layoutY="61.0" startX="-100.0" />
+      <ComboBox fx:id="CoursNomchapitre" layoutX="764.0" layoutY="614.0" prefHeight="38.0" prefWidth="303.0" promptText="Nom du Cours" />
+      <Hyperlink layoutX="1010.0" layoutY="18.0" onAction="#logoutcahp" prefHeight="42.0" prefWidth="159.0" text="Se déconnecter">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Hyperlink>
+   </children>
+</AnchorPane>

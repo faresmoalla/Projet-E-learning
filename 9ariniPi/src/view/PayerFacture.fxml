@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+
+<VBox prefHeight="681.0" prefWidth="623.0" stylesheets="@gestionPaiement.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PayerFactureController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="670.0" prefWidth="630.0" VBox.vgrow="ALWAYS">
+         <children>
+            <ImageView fitHeight="502.0" fitWidth="500.0" layoutX="60.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/payerFactureBG.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="carteBancaireFBG" fitHeight="200.0" fitWidth="350.0" layoutX="155.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/carteBancaireFBG.jpeg" />
+               </image>
+            </ImageView>
+            <Label fx:id="labNomService" layoutX="353.0" layoutY="77.0" stylesheets="@gestionPaiement.css" text="ePayini" />
+            <ImageView fx:id="puceCarteBancaire" fitHeight="55.0" fitWidth="55.0" layoutX="176.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/puceCarteBancaire.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="iconNFC" fitHeight="80.0" fitWidth="85.0" layoutX="204.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/iconNFC.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="labNumCarte" layoutX="188.0" layoutY="152.0" prefHeight="27.0" prefWidth="244.0" stylesheets="@gestionPaiement.css" />
+            <Label fx:id="labDateExpiration" layoutX="301.0" layoutY="187.0" prefHeight="27.0" prefWidth="39.0" stylesheets="@gestionPaiement.css" />
+            <Label fx:id="labNomClient" layoutX="170.0" layoutY="215.0" prefHeight="27.0" prefWidth="209.0" stylesheets="@gestionPaiement.css" />
+            <ImageView fx:id="iconMastercard" fitHeight="43.0" fitWidth="63.0" layoutX="388.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/iconMastercard.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="carteBancaireRBG" fitHeight="200.0" fitWidth="350.0" layoutX="155.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../Images/carteBancaireRBG.jpeg" />
+               </image>
+            </ImageView>
+            <Label fx:id="labValabilite" layoutX="220.0" layoutY="65.0" stylesheets="@gestionPaiement.css" text="VALABLE SEULEMENT EN TUNISIE" visible="false" />
+            <Rectangle fx:id="bandeMagnetique" arcHeight="5.0" arcWidth="5.0" height="45.0" layoutX="155.0" layoutY="80.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="310.0" />
+            <ImageView fx:id="bandeCodeSecret" fitHeight="55.0" fitWidth="188.0" layoutX="216.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../Images/bandeCodeSecret.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="labCodeSecret" layoutX="375.0" layoutY="139.0" prefHeight="27.0" prefWidth="28.0" stylesheets="@gestionPaiement.css" visible="false" />
+            <Label fx:id="labDetailCarte" layoutX="184.0" layoutY="171.0" prefHeight="81.0" prefWidth="254.0" stylesheets="@gestionPaiement.css" text="CETTE CARTE EST LA PROPRIETE DE LA PLATEFORME&#10;9ARINI. TOUTE PERSONNE TROUVANT CETTE CARTE&#10;EST PRIEE DE BIEN VOULOIR LA REMETTRE A NOTRE&#10;BUREAU D'ACCUEIL." visible="false" />
+            <Label layoutX="110.0" layoutY="324.0" text="Numéro de carte :" />
+            <TextField fx:id="numeroCarte" layoutX="246.0" layoutY="319.0" onAction="#numeroCarte" prefHeight="31.0" prefWidth="149.0" />
+            <Label layoutX="425.0" layoutY="324.0" text="CVV :" />
+            <TextField fx:id="CVV" layoutX="471.0" layoutY="319.0" onAction="#CVV" prefHeight="31.0" prefWidth="43.0" />
+            <Label layoutX="132.0" layoutY="376.0" text="Nom du propriétaire :" />
+            <TextField fx:id="nomProprietaire" layoutX="294.0" layoutY="371.0" onAction="#nomProprietaire" prefHeight="31.0" prefWidth="209.0" />
+            <Label layoutX="143.0" layoutY="430.0" text="Date d'expiration :" />
+            <ComboBox fx:id="moisCarte" layoutX="276.0" layoutY="425.0" onAction="#moisCarte" prefHeight="31.0" prefWidth="90.0" promptText="Mois" />
+            <ComboBox fx:id="anneeCarte" layoutX="394.0" layoutY="425.0" onAction="#anneeCarte" prefHeight="31.0" prefWidth="98.0" promptText="Année" />
+            <Label layoutX="310.0" layoutY="481.0" text="Prix TTC :" />
+            <TextField fx:id="prixTTC" editable="false" layoutX="385.0" layoutY="476.0" prefHeight="31.0" prefWidth="75.0" />
+            <Button layoutX="176.0" layoutY="606.0" mnemonicParsing="false" onAction="#payerFacture" text="Payer" />
+            <Button layoutX="396.0" layoutY="606.0" mnemonicParsing="false" onAction="#retourPayerFacture" text="Annuler" />
+         </children>
+    </AnchorPane>
+  </children>
+</VBox>

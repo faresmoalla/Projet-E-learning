@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="514.0" prefWidth="901.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GestionPubliciteController">
+   <children>
+      <AnchorPane layoutX="-2.0" prefHeight="514.0" prefWidth="217.0">
+         <children>
+            <ImageView fitHeight="523.0" fitWidth="226.0" layoutX="-10.0" layoutY="-10.0">
+               <image>
+                  <Image url="@contract-contrat.jpg" />
+               </image>
+            </ImageView>
+            <ComboBox fx:id="agemax" layoutX="12.0" layoutY="227.0" prefHeight="30.0" prefWidth="128.0" promptText="age max" />
+            <ComboBox fx:id="agemin" layoutX="12.0" layoutY="158.0" prefHeight="30.0" prefWidth="128.0" promptText="age min" />
+            <Button fx:id="valider" layoutX="151.0" layoutY="377.0" mnemonicParsing="false" onAction="#validerGenre" opacity="0.74" text="Valider" textFill="#1811e1" />
+            <ComboBox fx:id="M_Genre" layoutX="14.0" layoutY="80.0" prefWidth="150.0" promptText="Genre" />
+            <TextField fx:id="affichagePrix" editable="false" layoutX="28.0" layoutY="413.0" opacity="0.83" />
+            <Button fx:id="R_accepterContrat" layoutX="56.0" layoutY="473.0" mnemonicParsing="false" onAction="#RA_accepterContra" prefHeight="26.0" prefWidth="91.0" text="Accepter" />
+            <Label layoutX="61.0" layoutY="24.0" text="Ajouter un cible" />
+            <DatePicker fx:id="date_debut_cible" layoutX="12.0" layoutY="271.0" prefHeight="26.0" prefWidth="128.0" promptText="Date de debut" />
+            <DatePicker fx:id="date_fin_cible" layoutX="12.0" layoutY="323.0" prefHeight="26.0" prefWidth="128.0" promptText="Date de fin" />
+            <Button fx:id="modifier_cible" layoutX="56.0" layoutY="439.0" mnemonicParsing="false" onAction="#RA_modifCible" prefHeight="26.0" prefWidth="91.0" text="Modifier" visible="false" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="espace_pub" layoutX="210.0" prefHeight="286.0" prefWidth="690.0" visible="false">
+         <children>
+            <ImageView fitHeight="286.0" fitWidth="690.0">
+               <image>
+                  <Image url="@Pub99.jpg" />
+               </image>
+            </ImageView>
+            <TextField fx:id="bar_recherche" layoutX="244.0" layoutY="1.0" prefHeight="18.0" prefWidth="226.0" />
+            <Button fx:id="R_modifPub" layoutX="261.0" layoutY="236.0" mnemonicParsing="false" onAction="#RA_modifPub" prefHeight="26.0" prefWidth="45.0">
+               <graphic>
+                  <ImageView fitHeight="27.0" fitWidth="50.0">
+                     <image>
+                        <Image url="@icons8-modifier-50.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="R_creePubliciter" layoutY="1.0" mnemonicParsing="false" onAction="#RA_creePubliciter" prefHeight="26.0" prefWidth="111.0" text="Cree Publicité" wrapText="true" />
+            <Button fx:id="supp" layoutX="389.0" layoutY="236.0" mnemonicParsing="false" onAction="#SupprimerPub" prefHeight="35.0" prefWidth="66.0" />
+            <TableView fx:id="table" layoutX="-1.0" layoutY="96.0" opacity="0.56" prefHeight="138.0" prefWidth="690.0">
+               <columns>
+                  <TableColumn fx:id="R_Lien" prefWidth="75.0" text="Lien Publicite" />
+                  <TableColumn fx:id="R_image" prefWidth="75.0" text="Image" />
+                  <TableColumn fx:id="R_Video" prefWidth="75.0" text="video" />
+                  <TableColumn fx:id="R_Nclick" prefWidth="75.0" text="nbr Cklick" />
+                  <TableColumn fx:id="R_Naffichage" prefWidth="75.0" text="nbr Affichage" />
+                  <TableColumn fx:id="R_idCible" prefWidth="75.0" text="id Cible" />
+                  <TableColumn fx:id="Id_pub" prefWidth="75.0" text="id publicité" />
+               </columns>
+            </TableView>
+            <AnchorPane fx:id="espace_creation" layoutY="27.0" prefHeight="66.0" prefWidth="549.0" visible="false">
+               <children>
+                  <TextField fx:id="R_video_ajout" layoutX="8.0" layoutY="39.0" prefHeight="16.0" prefWidth="128.0" />
+                  <TextField fx:id="R_imageAjout" layoutX="146.0" layoutY="37.0" prefHeight="18.0" prefWidth="128.0" />
+                  <TextField fx:id="R_lienAjout" layoutX="286.0" layoutY="37.0" prefHeight="21.0" prefWidth="136.0" />
+                  <Label layoutX="172.0" layoutY="14.0" text="Lien Image:" />
+                  <Label layoutX="26.0" layoutY="14.0" text="Lien Video:" />
+                  <Label layoutX="308.0" layoutY="14.0" text="Lien publicité:" />
+                  <Button fx:id="R_ajouterPub" layoutX="609.0" layoutY="39.0" mnemonicParsing="false" onAction="#RA_ajouterPub" prefHeight="26.0" prefWidth="74.0" />
+                  <ImageView fitHeight="18.0" fitWidth="61.0" layoutX="615.0" layoutY="43.0">
+                     <image>
+                        <Image url="@icons8-ajouter.gif" />
+                     </image>
+                  </ImageView>
+                  <ComboBox fx:id="ffa" layoutX="432.0" layoutY="37.0" prefWidth="150.0" />
+               </children>
+            </AnchorPane>
+            <ImageView fitHeight="16.0" fitWidth="34.0" layoutX="405.0" layoutY="246.0">
+               <image>
+                  <Image url="@icons8-supprimer-16.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="26.0" fitWidth="34.0" layoutX="470.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Search_find_3519.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="espace_stat" layoutX="217.0" layoutY="289.0" prefHeight="192.0" prefWidth="683.0" visible="false">
+         <children>
+            <ImageView fitHeight="226.0" fitWidth="683.0">
+               <image>
+                  <Image url="@Capture%20d’écran%202021-10-19%20024627.png" />
+               </image>
+            </ImageView>
+            <BarChart fx:id="stat_nbr_click" layoutX="14.0" layoutY="17.0" opacity="0.8" prefHeight="194.0" prefWidth="638.0">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+            </BarChart>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

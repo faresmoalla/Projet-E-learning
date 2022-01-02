@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="FenetreModifier" prefHeight="741.0" prefWidth="1144.0" style="-fx-background-color: #FFF0BC #FFF0BC;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.CoursModifierController">
+   <children>
+      <TextField fx:id="labelutulisateurid" layoutX="729.0" layoutY="274.0" prefHeight="39.0" prefWidth="400.0" promptText="Identifiant du Formateur" />
+      <TextField fx:id="labelnbrchapitre" layoutX="729.0" layoutY="349.0" prefHeight="39.0" prefWidth="400.0" promptText="Nombres de Chapitres" />
+      <TextField fx:id="labelcoursnom" layoutX="729.0" layoutY="126.0" prefHeight="39.0" prefWidth="400.0" promptText="Nom du Cours" />
+      <TextField fx:id="labeldescription" alignment="TOP_LEFT" layoutX="729.0" layoutY="491.0" prefHeight="187.0" prefWidth="400.0" promptText="Description" />
+      <Button fx:id="modifierc" layoutX="990.0" layoutY="695.0" mnemonicParsing="false" onAction="#modifierCours" prefHeight="42.0" prefWidth="123.0" style="-fx-background-color: #1E7FCB;" text="Confirmer" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font></Button>
+      <Label fx:id="labelcoursid" layoutX="120.0" layoutY="48.0" />
+      <Hyperlink fx:id="Acceuilmodifer" layoutX="580.0" layoutY="14.0" onAction="#Acceuilmodiferr" prefHeight="42.0" prefWidth="96.0" text="Accueil">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink layoutX="1093.0" layoutY="14.0" prefHeight="42.0" prefWidth="73.0" text="Profil">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink fx:id="retourmodifier" layoutX="489.0" layoutY="14.0" onAction="#RetourModifier" prefHeight="42.0" prefWidth="96.0" text="Retour">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Hyperlink>
+      <Line endX="560.0" layoutX="608.0" layoutY="58.0" startX="-111.0" />
+      <ImageView fitHeight="751.0" fitWidth="489.0">
+         <image>
+            <Image url="@../Images/b449ad756bb05a2d6f8f2805ecd7ed5c.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="549.0" layoutY="131.0" text="Nom du Cours">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="503.0" layoutY="278.0" prefHeight="35.0" prefWidth="225.0" text="Identifiant du Formateur" textFill="#0d0d0d">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="528.0" layoutY="362.0" text="Nombres de Chapitres">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="522.0" layoutY="203.0" prefHeight="13.0" prefWidth="207.0" text="Nom de la Categorie">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="577.0" layoutY="491.0" text="Description" textFill="#030303">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="771.0" layoutY="69.0" text="Modifier un cours" textFill="#a41010">
+         <font>
+            <Font name="High Tower Text" size="29.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="labelcategorieid" layoutX="729.0" layoutY="198.0" prefHeight="42.0" prefWidth="400.0" promptText="Nom de la Categorie" />
+      <Button layoutX="729.0" layoutY="422.0" mnemonicParsing="false" onAction="#Browseimgonmodifier" prefHeight="39.0" prefWidth="400.0" text="Browse" />
+      <Label fx:id="labelimgpathonmodifier" layoutX="520.0" layoutY="602.0" text="Label" visible="false" />
+      <Label layoutX="543.0" layoutY="428.0" text="Image du Cours" textFill="#030303">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="imageonmodifierrr" fitHeight="98.0" fitWidth="129.0" layoutX="537.0" layoutY="585.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="labelpathduphotofilmodi" layoutX="532.0" layoutY="542.0" text="Label" visible="false" />
+      <Hyperlink layoutX="935.0" layoutY="14.0" onAction="#logsdansmodifss" prefHeight="42.0" prefWidth="159.0" text="Se déconnecter">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Hyperlink>
+   </children>
+</AnchorPane>

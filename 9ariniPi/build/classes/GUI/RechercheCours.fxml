@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="FentreRechCours" prefHeight="654.0" prefWidth="848.0" style="-fx-background-color: #FFF0BC #FFF0BC;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.RechercheCoursController">
+   <children>
+      <Hyperlink fx:id="ReturnAcceuilcateg5" layoutX="92.0" layoutY="14.0" onAction="#ReturnAcceuilRechCours" prefHeight="42.0" prefWidth="96.0" text="Accueil">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink fx:id="profilllll" layoutX="858.0" layoutY="14.0" prefHeight="42.0" prefWidth="74.0" text="Profil">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Hyperlink>
+      <Line endX="588.0" layoutX="357.0" layoutY="63.0" startX="-357.0" />
+      <Hyperlink fx:id="retourrrrr" layoutX="14.0" layoutY="14.0" onAction="#PrecedentinterfaceRechcours" prefHeight="42.0" prefWidth="83.0" text="Retour">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Hyperlink>
+      <Line endX="-98.5" endY="132.5" layoutX="191.0" layoutY="172.0" startX="-100.0" startY="-25.0" />
+      <Line endX="528.5" layoutX="193.0" layoutY="304.0" startX="-100.0" />
+      <ImageView fx:id="imginsearch" fitHeight="128.0" fitWidth="176.0" layoutX="114.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true" />
+      <TextField fx:id="searchfisearch" layoutX="188.0" layoutY="16.0" prefHeight="38.0" prefWidth="382.0" promptText="Search" style="-fx-border-color: #64c3; -fx-background-radius: 200; -fx-border-radius: 200;" styleClass="combo-box" />
+      <Button layoutX="590.0" layoutY="251.0" mnemonicParsing="false" onAction="#GotoceCours" style="-fx-background-color: #1E7FCB;" text="S'iniscrire" textFill="WHITE" />
+      <Label fx:id="LableCourss" layoutX="149.0" layoutY="266.0" text="CoursNom">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
+      <ScrollBar layoutX="918.0" layoutY="64.0" orientation="VERTICAL" prefHeight="585.0" prefWidth="27.0" style="-fx-background-color: #FFF0BC #FFF0BC;" />
+      <Button fx:id="buttonrechfilrech" layoutX="590.0" layoutY="14.0" mnemonicParsing="false" onAction="#SearchfiSearch" prefHeight="42.0" prefWidth="105.0" style="-fx-border-radius: 200; -fx-background-radius: 200; -fx-background-color: #1E7FCB;" text="Rechercher" textFill="WHITE" />
+      <Label layoutX="369.0" layoutY="174.0" text="Description">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="descriptioninrecherchee" layoutX="389.0" layoutY="230.0" text="description" />
+      <Label fx:id="labelpathimg" layoutX="132.0" layoutY="461.0" opacity="0.0" text="Label" visible="false" />
+      <Hyperlink layoutX="722.0" layoutY="14.0" onAction="#logfffssfff" prefHeight="42.0" prefWidth="159.0" text="Se déconnecter">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Hyperlink>
+   </children>
+</AnchorPane>

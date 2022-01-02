@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="617.0" prefWidth="972.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DetailController">
+   <children>
+      <TableView fx:id="table_comm" layoutX="458.0" layoutY="21.0" prefHeight="233.0" prefWidth="492.0">
+        <columns>
+          <TableColumn fx:id="list_name" prefWidth="121.0" text="User Name" />
+          <TableColumn fx:id="list_comm" prefWidth="384.0" text="List des Commentaires sur cette article" />
+        </columns>
+      </TableView>
+      <Label layoutX="129.0" layoutY="53.0" prefHeight="21.0" prefWidth="55.0" text="object">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Label>
+      <Label layoutX="116.0" layoutY="148.0" prefHeight="21.0" prefWidth="101.0" text="contenue">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Label>
+      <Button fx:id="bnt_comm" layoutX="486.0" layoutY="356.0" mnemonicParsing="false" onAction="#ajouter_comment" text="Comment" />
+      <TextArea fx:id="comm" layoutX="585.0" layoutY="327.0" prefHeight="89.0" prefWidth="265.0" />
+      <Label layoutX="627.0" layoutY="282.0" prefHeight="21.0" prefWidth="181.0" text="Ajouter un commentaire" />
+      <Label fx:id="articleid" layoutX="925.0" layoutY="547.0" prefHeight="21.0" prefWidth="25.0" />
+      <Label fx:id="userid" layoutX="899.0" layoutY="547.0" prefHeight="21.0" prefWidth="18.0" />
+      <Label fx:id="username" layoutX="858.0" layoutY="547.0" prefHeight="21.0" prefWidth="18.0" />
+      <Label fx:id="text_object" layoutX="180.0" layoutY="32.0" prefHeight="21.0" prefWidth="214.0" />
+      <Label fx:id="text_contenue" layoutX="166.0" layoutY="127.0" prefHeight="70.0" prefWidth="232.0" />
+      <Hyperlink layoutX="14.0" layoutY="11.0" onAction="#bacfff" prefHeight="42.0" prefWidth="96.0" text="Retour">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Hyperlink>
+   </children>
+</AnchorPane>
