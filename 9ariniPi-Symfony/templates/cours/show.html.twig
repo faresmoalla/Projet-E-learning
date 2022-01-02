@@ -1,0 +1,174 @@
+{% extends 'cours/base-front.html.twig' %}
+
+{% block headers %}
+    <link href="{{ asset('back/amine/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <style>
+        .count-panier {
+            position: relative;
+            font-size: 24px;
+            color: #FFFFFF;
+            bottom: 16px;
+            right: 41px;
+        }
+
+        .menu-button:hover:after {
+            content: 'Vous avez {{ unseen|length }} message(s) non lu(s)';
+            font-size: 7px;
+            font-weight: bolder;
+            display: inline-block;
+            position: relative;
+            bottom: 80px;
+            left: 25px;
+        }
+
+        .menu-list {
+            position: absolute;
+            display: none;
+            min-width: 19rem;
+            font-size: 10px;
+            color: black;
+            text-align: center;
+            background-color: white;
+            line-height: 20px;
+        }
+
+        .menu {
+            position: relative;
+            display: inline-block;
+        }
+
+        .menu:hover .menu-list {
+            display: block;
+            right: 5px;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>9arini</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('/front/Search/assets/favicon.ico')}}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('front/acceuil/assets/favicon.ico')}}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('front/acceuil/assets/favicon.ico')}}" />
+    <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+
+</head>
+<body>
+
+
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        {% for message in app.flashes('info') %}
+            {% if message == 'Votre commande a été ajoutée avec succès.' %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% else %}+
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endif %}
+        {% endfor %}
+        <br>
+        <section class="bg-light p-3">
+            <div style="text-align: end">
+            <span class="fa-stack fa-3x">
+                <div class="menu">
+                    <a on class="menu-button" href="#"><i class="fas fa-envelope fa-fw"></i></a>
+                    <div class="menu-list" id="list">
+                        {% for reclamation in reclamations %}
+                            {% if reclamation.etatReponse == 0 %}
+                                <a>{{reclamation.dateReclamation|date('Y-m-d H:i:s')}}<br>Votre demande a été "{{reclamation.messageReclamation}}"<br>{{reclamation.dateReclamation|date('Y-m-d H:i:s')}}<br>La réponse est "{{reclamation.reponseReclamation}}"</a><button><a href="{{ path("reclamation_unseen", {reclamationid: reclamation.reclamationID }) }}"><i class="bi bi-envelope-fill"></i></a></button><hr>
+                            {% else %}
+                                <b><a>{{reclamation.dateReclamation|date('Y-m-d H:i:s')}}<br>Votre demande a été "{{reclamation.messageReclamation}}"<br>{{reclamation.dateReclamation|date('Y-m-d H:i:s')}}<br>La réponse est "{{reclamation.reponseReclamation}}"</a></b><button><a href="{{ path("reclamation_seen", {reclamationid: reclamation.reclamationID }) }}"><i class="bi bi-envelope-open-fill"></i></a></button><hr>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </span>
+                <span class="fa-stack fa-3x">
+                <a href="{{ path("panierOuverte") }}"><i class="fa fa-shopping-cart fa-stack-3x"></i></a>
+                    {% set count = 0 %}
+                    {% for commande in commandes %}
+                        {% set count = count + 1 %}
+                    {% endfor %}
+                <span class="count-panier">{{ count }}</span>
+            </span>
+                <span style="color:black">{{ prixTotal }} DT</span>
+            </div>
+
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                <div class="alert alert-success">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+            {% for flashMessage in app.session.flashbag.get('danger') %}
+                <div class="alert alert-danger">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+            {{ form(form2) }}
+        </section>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            {% for f in courss %}
+            <div class="col mb-5">
+                <div class="card h-100">
+                    {% if f.nbrChapitres == 0%}
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Gratuit</div>
+                    {% else %}
+                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">{{ f.nbrChapitres }} dt</div>
+                    {% endif %}
+
+                    <img  width="200" height="150" src="{{ asset('/front/web/images/')}}{{ f.coursImg }}"    />
+
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">{{ f.nomCours  }}</h5>
+                            <!-- Product reviews-->
+
+                            <!-- Product price-->
+                            <span class="text-muted text-decoration-line-through"></span>
+                            {{ f.description }}
+                        </div>
+
+
+
+
+
+
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+
+                        <div class="text-center">
+                            <a class="btn btn-outline-dark mt-auto" href="{{ path('get_cours', {id:f.id}) }}">Ouvrir</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ asset('/front/Search/js/scripts.js')}}"></script>
+<script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
+</body>
+</html>
+{% endblock %}
