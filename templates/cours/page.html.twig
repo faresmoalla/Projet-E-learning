@@ -1,0 +1,169 @@
+{% extends 'cours/base-front.html.twig' %}
+
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+        <style>
+            #leftpub {
+                float: left;
+                top: 30px;
+                left: 10px;
+                width: 150px;
+                height: 1000px;
+
+
+            }
+            #rightpub {
+                float: right;
+                top: 30px;
+                left: 1000px;
+                width: 150px;
+                height: 1000px;
+
+
+            }
+
+
+        </style>
+    </head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>{{ cours.nomcours }}</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('/front/Search/assets/favicon.ico')}}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('front/acceuil/assets/favicon.ico')}}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('front/acceuil/assets/favicon.ico')}}" />
+
+</head>
+<body>
+{% set c = 0 %}
+{% set p1 = ""%}
+{% set p2 = ""%}
+
+
+{% set pid1 = 0  %}
+{% set pid2 = 0  %}
+
+
+{% for p in pub %}
+
+    {% if c==0 %}
+
+        {% set p1 = p.imagePublicite  %}
+        {% set pid1 = p.id  %}
+
+
+        {% set c=c+1 %}
+    {% elseif c==1%}
+
+        {% set p2 = p.imagePublicite  %}
+        {% set pid2 = p.id  %}
+        {% set c=c+1 %}
+    {% endif %}
+{% endfor %}
+
+
+
+
+
+<div id="leftpub">
+    <a href="{{ path('NbrClick',{'id': pid1}) }}">
+        <img src="{{ asset('/front/web/images/')}}{{p1}}" height="1000" width="150"/>
+    </a>
+</div>
+
+<div id="rightpub">
+    <a href="{{ path('NbrClick',{'id': pid2}) }}" >
+        <img src="{{ asset('/front/web/images/')}}{{p2}}" height="1000" width="150"/>
+    </a>
+</div>
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <img src="{{ asset('/front/web/images/')}}{{ cours.coursImg }}" width="100"  />
+        <div align="right">
+            <a href="{{ path('reclamation_new') }}" class="btn btn-danger"><i class="bi bi-receipt-cutoff"></i> Réclamer </a>
+        </div>
+        <br>
+        <div align="right">
+            <a href="{{ path('certif')}}" class="btn btn-warning"><i class="bi bi-printer"></i> Imprimer </a>
+        </div>
+        <br>
+        <div align="right">
+            <a href="{{ path("ajoutCommande", {coursid : cours.id}) }}" class="btn btn-success"><i class="bi bi-cart-plus"></i> Ajouter au panier </a>
+        </div>
+            <div> <center><h1>{{ cours.nomcours }} </h1></center></div>
+
+
+<hr>
+
+
+
+
+
+
+        {% for chapitre in cours.chapitre %}
+<aside>
+
+
+                        <div align="left"> <h5> {{ chapitre.getChapitrenom}}</h5> </div>
+</aside>
+<article  align="right">
+
+
+                <video  id="example_video_1" class="video-js vjs-default-skin"
+                       controls preload="auto" width="1200" height="700"
+                       poster="http://video-js.zencoder.com/oceans-clip.png"
+                       data-setup='{"example_option":true}'>
+
+
+                <source src="{{ asset('/front/web/images/')}}{{ chapitre.getImage}}" type='video/mp4' />
+
+                </video>
+    <h3>Description</h3>
+    {{ cours.description }}
+    <br>
+    <br>
+    <br>
+    <hr>
+    <hr>
+    <td>  <a href="{{ path('pdf2',{'id': chapitre.id}) }}"> PDF</a></td>
+
+</article>
+                           {% endfor %}
+
+
+
+
+
+
+<br>
+<br>
+
+
+
+
+    </div>
+    </div>
+    <br>
+    <br> <br>
+    <br> <br>
+    <br> <br>
+    <br> <br>
+    <br> <br>
+    <br> <br>
+    <br>
+</section>
+
+
+
+
+
+
+
+</body>
+</html>
+{% endblock %}

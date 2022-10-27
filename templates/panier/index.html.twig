@@ -1,0 +1,82 @@
+{% extends 'base-front3.html.twig' %}
+
+{% block title %} Votre panier {% endblock %}
+
+{% block body %}
+    <section class="bg-light p-3">
+        <h1>Votre panier</h1>
+    </section>
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+    <table class="table">
+        <thead>
+        {% set count = 0 %}
+        {% for commande in commandes %}
+            {% set count = count + 1 %}
+        {% endfor %}
+        {% if count > 0 %}
+            <tr>
+                <th style="text-align: center">Commande</th>
+                <th style="text-align: center">Nom</th>
+                <th style="text-align: center">Prix</th>
+                <th style="text-align: center">Action</th>
+            </tr>
+        {% endif %}
+        </thead>
+        <tbody>
+        {% for commande in commandes %}
+            <tr>
+                <td class="text-end">
+                    <div style="text-align: center">
+                        <img src="{{ asset('front/web/images/') ~ commande.coursImg }}" alt="">
+                    </div>
+                </td>
+                <td style="text-align: center">
+                    <h5>{{ commande.nomCours }}</h5>
+                </td>
+                <td style="text-align: center">
+                    <h5>{{ commande.prixCours }} DT</h5>
+                </td>
+                <td>
+                    <div style="text-align: center">
+                        <a href="{{path("suppressionCommande", {commandeid: commande.commandeID})}}" class="btn btn-danger"><i class="bi bi-cart-x"></i> Supprimer </a>
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <br>
+                <div style="text-align: center">
+                    <img src="{{ asset('front/web/images/panierVide.png') }}" alt="">
+                </div>
+                <br>
+                <td colspan="5" style="text-align: center">
+                    <div class="text-center">Votre panier est vide. Continuez vos achats et trouvez un cours !</div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <td>
+                <a href="{{path("rechercher")}}" class="btn btn-success"><i class="bi bi-cart-plus"></i> Continuer vos achats</a>
+            </td>
+            {% set count = 0 %}
+            {% for commande in commandes %}
+                {% set count = count + 1 %}
+            {% endfor %}
+            {% if count > 0 %}
+            <td>
+                <a href="{{path("paiementPanier")}}" class="btn btn-warning"><i class="bi bi-cart-check"></i> Payer votre panier</a>
+            </td>
+        {% endif %}
+            <td class="text-end" colspan="4">
+                <h4>Total : {{ prixTotal }} DT</h4>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+{% endblock %}

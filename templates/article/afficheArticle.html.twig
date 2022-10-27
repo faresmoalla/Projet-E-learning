@@ -1,0 +1,128 @@
+{% extends 'cours/base-front.html.twig' %}
+
+{% block body %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>9arini</title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('front/yahia/assets/favicon.ico')}}" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{{ asset('front/yahia/css/styles.css')}}" rel="stylesheet" />
+    </head>
+    <body>
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+
+        </div>
+    </nav>
+    <!-- Page Header-->
+    <header class="masthead" style="background-image: url('front/yahia/assets/img/home-bg.jpg')">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="site-heading">
+                        <h1>ARTICLE</h1>
+                        <span class="subheading">WRITE WHAT YOU WANT</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content-->
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+
+
+
+
+
+
+                {% for message in app.flashes('info') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+
+
+                {% for f in tableArticle %}
+
+                    <hr class="my-4" />
+
+                    <div class="post-preview">
+
+                        <p class="post-meta">
+                            Posted by
+                            <a href={{ path('ajoutNote',{'id': f.id}) }}>{{ f.utilisateur  }}</a>
+                            on December 8, 2021
+                        </p>
+                    </div>
+
+
+                    <H2  class="post-title" >
+                        <a  href="{{ path('get_article', {id:f.id,user:currentUser}) }}"> contenu: {{ f.content }}</a>
+                    </H2>
+
+
+
+
+
+
+                    <div>
+                        <h5 class="post-subtitle"> plus d'explication : {{ f.object  }}</h5>
+                    </div>
+
+
+
+
+
+                    <div >
+                        <a  href="{{path('add_like',{articleId:f.id, user:currentUser} ) }}">  <img   width="30" src="https://cdn-icons-png.flaticon.com/512/126/126473.png"></a>{{ f.nbLikes }}
+
+                        <a  href="{{path('add_dislike',{articleId:f.id, user:currentUser} ) }}"> <img   width="30" src="https://cdn-icons-png.flaticon.com/512/126/126504.png"></a>{{ f.nbDislike }}
+
+                    </div>
+
+
+
+                    {% if f.utilisateur.id == currentUser %}
+                        <a href="{{ path('article_delete', {'id': f.id}) }}" ><img src="https://img.icons8.com/color/48/000000/trash--v2.png"/></a>
+                        <a href="{{ path('article_edit', {'id': f.id}) }}" ><img width="30" src="https://cdn-icons-png.flaticon.com/512/1159/1159633.png"/></a>
+                    {% endif %}
+
+
+
+                {% endfor %}
+
+                <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="{{ path('ajoutarticle',{'user': currentUser}) }}">Ajouter Article →</a></div>
+
+
+
+
+
+
+
+
+
+                <!-- Bootstrap core JS-->
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+                <!-- Core theme JS-->
+                <script src="{{ asset('front/yahia/js/scripts.js')}}"></script>
+    </body>
+    </html>
+{% endblock %}
